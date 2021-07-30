@@ -58,6 +58,20 @@ export class LoginComponent implements OnInit {
       console.log(res)
       this.router.navigateByUrl(`/students/profile/user/${res['student']['aluno_id']}`)
     }, err => {
+
+      if(err.status === 500){
+        Swal.fire('Error', 'Utilizador não validado por mais de 3 meses, por favor contacte o suporte.', 'error')
+        return
+      }
+
+      if(err.status === 406){
+        Swal.fire('Error', 'Deve validar o seu e-mail e número de telefone a fim de iniciar sessão.', 'error').then(result => {
+          if(result.isConfirmed){
+            this.router.navigateByUrl(`/students/verifyCodePhone`)
+          }
+        })
+        return
+      }
       Swal.fire('Error', err['error']['err'], 'error')
     })
   }

@@ -97,6 +97,29 @@ LOCK TABLES `alunos` WRITE;
 /*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `alunos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `admins` (
+  `admin_id` int NOT NULL AUTO_INCREMENT,
+  `admin_nome` varchar(100) NOT NULL,
+  `admin_email` varchar(100) NOT NULL,
+  `admin_password` varchar(100) NOT NULL,
+  `admin_telemovel` varchar(100) NOT NULL,
+  `admin_role` ENUM('superadmin', 'admin', 'operador')
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alunos`
+--
+
+LOCK TABLES `alunos` WRITE;
+/*!40000 ALTER TABLE `alunos` DISABLE KEYS */;
+/* INSERT INTO `alunos` VALUES (1,NULL,'Carlos Guerra',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'+584147118022',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Venezuela','Bachiller',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'carlosguerra2001.2@gmail.com','$2b$10$fMrTFC.Uwx1dGACI363Ah.gS9EyaJPj1qscbeV2oUCIpmjcPIRW/2','851f3ed0-3f78-4e53-b081-afd78c332f3a'); */
+/*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
+UNLOCK TABLES;
+
 --
 -- Table structure for table `area`
 --
