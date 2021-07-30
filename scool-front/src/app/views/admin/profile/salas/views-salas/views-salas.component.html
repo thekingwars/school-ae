@@ -1,0 +1,52 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de uma escola</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="w-100 d-flex justify-content-center">
+                    <div style="height: 50%; width: 50%;">
+                        <img [src]="sala['sala_foto']" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Sala nome</label>
+                    <input type="text" class="form-control" [placeholder]="sala['sala_nome']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Sala capacidade aconselhada</label>
+                    <input type="number" class="form-control" [placeholder]="sala['sala_capacidade_aconselhada']" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- textarea -->
+                <div class="form-group">
+                    <label>Sala capacidade maxima</label>
+                    <input type="number" class="form-control" [placeholder]="sala['sala_capacidade_maxima']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Sala equipamento quantidade</label>
+                    <input type="number" class="form-control" [placeholder]="sala['sala_equipamento_quantidade']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Escola nome</label>
+                    <input type="number" class="form-control" [placeholder]="sala['escola_nome']" disabled>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.card-body -->

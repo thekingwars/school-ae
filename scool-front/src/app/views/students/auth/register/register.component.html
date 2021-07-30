@@ -1,0 +1,128 @@
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('../../../../assets/images/img-01.jpg');">
+        <div class="wrap-login100 p-t-100 p-b-30">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="login100-form validate-form">
+                <div class="login100-form-avatar">
+                    <img src="../../../../assets/images/avatar-01.jpg" alt="AVATAR">
+                </div>
+
+                <span class="login100-form-title p-t-20 p-b-45">
+                    Registo do Aluno
+                </span>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
+                            <input class="input100" type="text" formControlName="aluno_nome" placeholder="Nome" [class.noEsValido]="isValidField('aluno_nome')">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fa fa-user"></i>
+                            </span>
+                        </div>
+                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_nome')">
+                            {{getErrorMessageLetras('aluno_nome')}}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
+                            <input class="input100" type="tel" [dropSpecialCharacters]="false" prefix="+351" mask="000000000" formControlName="aluno_telemovel" placeholder="Telemóvel" [class.noEsValido]="isValidField('aluno_telemovel')">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                        </div>
+                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_telemovel')">
+                            {{getErrorMessage('aluno_telemovel')}}
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
+                            <input class="input100" type="text" formControlName="aluno_habilitacao" placeholder="Morada" [class.noEsValido]="isValidField('aluno_habilitacao')">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </span>
+                        </div>
+                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_habilitacao')">
+                            {{getErrorMessage('aluno_habilitacao')}}
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
+                            <input class="input100" type="text" formControlName="aluno_formacao" placeholder="Formação" [class.noEsValido]="isValidField('aluno_formacao')">
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fas fa-user-tie"></i>
+                            </span>
+                        </div>
+                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_formacao')">
+                            {{getErrorMessageLetras('aluno_formacao')}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-10">
+                    <select class="input100Select" [class.noEsValido]="isValidField('aluno_idad')" formControlName="aluno_idad" style="outline: none;">
+                        <option selected="selected">Seleccione uma idade</option>
+                        <option *ngFor="let item of number; let i = index">{{item + 11}}</option>
+                    </select>
+                    <span class="symbol-input100">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+
+                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_idad')">
+                    {{getErrorMessage('aluno_idad')}}
+                </p>
+
+                <div class="wrap-input100 validate-input m-b-10 p-l-2">
+                    <input class="input100" type="email" formControlName="aluno_email" [class.noEsValido]="isValidField('aluno_email')" placeholder="Email">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fas fa-envelope"></i>
+                    </span>
+                </div>
+
+                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_email')">
+                    {{getErrorMessage('aluno_email')}}
+                </p>
+
+                <div class="wrap-input100 validate-input m-b-10">
+                    <input class="input100" type="password" formControlName="aluno_password" [class.noEsValido]="isValidField('aluno_password')" placeholder="Crie uma Senha">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+
+                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px" *ngIf="isValidField('aluno_password')">
+                    {{getErrorMessage('aluno_password')}}
+                </p>
+
+                <div class="container-login100-form-btn p-t-10">
+                    <button class="login100-form-btn" *ngIf="registerForm.valid">
+                        Registe-se
+                    </button>
+                </div>
+
+                <div class="text-center w-full p-t-25">
+                    <a routerLink="/students/forgoutPassword" class="txt1">
+                        Forgot Password?
+                    </a>
+
+                    <div>
+                        <a class="txt1" routerLink="/students/login">
+                            ¿Já tens uma conta?
+                            <i class="fa fa-long-arrow-right"></i>						
+                        </a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

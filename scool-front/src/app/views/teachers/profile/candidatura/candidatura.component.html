@@ -1,0 +1,33 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Quick Example</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form [formGroup]="candidaturaForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <app-dropzone [(model)]="model" [allowedFiles]="['application/pdf']"></app-dropzone>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Professor lingua nativa</label>
+                                    <input type="text" formControlName="professor_lingua_nativa" class="form-control" [class.is-invalid]="isValidField('professor_lingua_nativa')" [class.is-valid]="ValidInput('professor_lingua_nativa')" placeholder="Enter email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

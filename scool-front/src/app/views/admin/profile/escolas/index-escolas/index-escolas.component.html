@@ -1,0 +1,48 @@
+<!-- <section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">DataTable with minimal features & hover style</h3>
+                        <div class="d-flex w-100" style="justify-content: flex-end;">
+                            <button class="btn btn-primary" routerLink="/admin/profile/create/escolas">Crear Escola</button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table datatable [dtOptions]="dtOptions" class="table table-striped table-bordered table-sm row-border hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Escola nome</th>
+                                    <th>Escola nif</th>
+                                    <th>Opções</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let escola of escolas; let i = index">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{escola['escola_nome']}}</td>
+                                    <td>{{escola['escola_nif']}}</td>
+                                    <td>
+                                        <button class="btn btn-outline-primary mr-1" (click)="viewEscola(escola['escola_id'])">
+                                            <i class="far fa-eye"></i>
+                                        </button>
+                                        <button class="btn btn-outline-success mr-1" (click)="editEscola(escola['escola_id'])">
+                                            <i class="fas fa-pencil-alt"></i>
+                                        </button>
+                                        <button class="btn btn-outline-danger" (click)="deleteEscola(escola, i)">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+<full-calendar [options]="calendarOptions"></full-calendar>

@@ -1,0 +1,31 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de uma instalacoes</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="instalacoesForm" (ngSubmit)="onSubmit()">
+            <!-- input states -->
+            <div class="form-group">
+                <label class="col-form-label" for="inputSuccess">Instalacoes nome</label>
+                <input type="text" [class.is-invalid]="isValidField('instalacoes_nome')" [class.is-valid]="ValidInput('instalacoes_nome')" formControlName="instalacoes_nome" class="form-control" id="inputSuccess" placeholder="Enter...">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputWarning">Escola nome</label>
+                <select [class.is-invalid]="isValidField('escolas_fk')" [class.is-valid]="ValidInput('escolas_fk')" formControlName="escolas_fk" class="form-control" id="inputWarning">
+                    <option value="" selected>
+                        Seleccionar uma escola
+                    </option>
+                    <option [value]="escola['escola_id']" *ngFor="let escola of escolas">
+                        {{escola['escola_nome']}}
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Crear
+            </button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>

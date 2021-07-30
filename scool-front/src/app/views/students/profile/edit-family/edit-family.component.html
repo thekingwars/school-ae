@@ -1,0 +1,98 @@
+<!-- Content Header (Page header) -->
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Dad info</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<div class="container" style="padding-top: 20px">
+    <div class="row">
+        <div class="col-md-9" style="margin: 0 auto;">
+            <form [formGroup]="dadForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Paihabilitacao">Pai habilitacao</label>
+                        <input type="text" formControlName="aluno_pai_habilitacao" [class.is-invalid]="isValidFieldDad('aluno_pai_habilitacao')" [class.is-valid]="ValidInputDad('aluno_pai_habilitacao')" class="form-control" id="Paihabilitacao">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Paiformacao">Pai formacao</label>
+                        <input type="text" [class.is-invalid]="isValidFieldDad('aluno_pai_formacao')" [class.is-valid]="ValidInputDad('aluno_pai_formacao')" formControlName="aluno_pai_formacao" class="form-control" id="Paiformacao">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Paiprofissao">Pai profissao</label>
+                        <input type="text" [class.is-invalid]="isValidFieldDad('aluno_pai_profissao')" [class.is-valid]="ValidInputDad('aluno_pai_profissao')" formControlName="aluno_pai_profissao" class="form-control" id="Paiprofissao" placeholder="Ing en computación">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Paicontacto">Pai contacto</label>
+                        <input type="text" [class.is-invalid]="isValidFieldDad('aluno_pai_contacto')" [class.is-valid]="ValidInputDad('aluno_pai_contacto')" formControlName="aluno_pai_contacto" class="form-control" id="Paicontacto" placeholder="+584127511913">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Painome">Pai nome</label>
+                    <input type="text" [class.is-invalid]="isValidFieldDad('aluno_pai_nome')" [class.is-valid]="ValidInputDad('aluno_pai_nome')" formControlName="aluno_pai_nome" class="form-control" id="Painome" placeholder="pai@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="Paiemail">Pai email</label>
+                    <input type="text" [class.is-invalid]="isValidFieldDad('aluno_pai_email')" [class.is-valid]="ValidInputDad('aluno_pai_email')" formControlName="aluno_pai_email" class="form-control" id="Paiemail" placeholder="pai@example.com">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1>Mom info</h1>
+            </div>
+        </div>
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<div class="container" style="padding: 20px 0px">
+    <div class="row">
+        <div class="col-md-9" style="margin: 0 auto;">
+            <form [formGroup]="momForm" (ngSubmit)="onSubmitMom()">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Maehabilitacao">Mae habilitacao</label>
+                        <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_habilitacao')" [class.is-valid]="ValidInputMom('aluno_mae_habilitacao')" formControlName="aluno_mae_habilitacao" class="form-control" id="Maehabilitacao">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Maeformacao">Mae formacao</label>
+                        <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_formacao')" [class.is-valid]="ValidInputMom('aluno_mae_formacao')" formControlName="aluno_mae_formacao" class="form-control" id="Maeformacao">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="Maeprofissao">Mae profissao</label>
+                        <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_profissao')" [class.is-valid]="ValidInputMom('aluno_mae_profissao')" formControlName="aluno_mae_profissao" class="form-control" id="Maeprofissao" placeholder="Ing en computación">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="Maecontacto">Mae contacto</label>
+                        <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_contacto')" [class.is-valid]="ValidInputMom('aluno_mae_contacto')" formControlName="aluno_mae_contacto" class="form-control" id="Maecontacto" placeholder="+584127511913">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="Maenome">Mae nome</label>
+                    <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_nome')" [class.is-valid]="ValidInputMom('aluno_mae_nome')" formControlName="aluno_mae_nome" class="form-control" id="Maenome" placeholder="pai@example.com">
+                </div>
+                <div class="form-group">
+                    <label for="Maeemail">Mae email</label>
+                    <input type="text" [class.is-invalid]="isValidFieldMom('aluno_mae_email')" [class.is-valid]="ValidInputMom('aluno_mae_email')" formControlName="aluno_mae_email" class="form-control" id="Maeemail" placeholder="mae@example.com">
+                </div>
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+        </div>
+    </div>
+</div>

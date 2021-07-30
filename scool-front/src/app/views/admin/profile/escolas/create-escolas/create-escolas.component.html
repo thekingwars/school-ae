@@ -1,0 +1,78 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de uma escola</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="escolaForm" (ngSubmit)="onSubmit()">
+            <app-dropzone [(model)]="model" [allowedFiles]="['image/jpeg', 'image/png']"></app-dropzone>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Escola nif</label>
+                        <input type="number" formControlName="escola_nif" [class.is-invalid]="isValidField('escola_nif')" [class.is-valid]="ValidInput('escola_nif')" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Escola nome</label>
+                        <input type="text" [class.is-invalid]="isValidField('escola_nome')" [class.is-valid]="ValidInput('escola_nome')" formControlName="escola_nome" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Escola rua</label>
+                        <input type="text" [class.is-invalid]="isValidField('escola_rua')" [class.is-valid]="ValidInput('escola_rua')" formControlName="escola_rua" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Escola codigo postal</label>
+                        <select class="form-control" [class.is-invalid]="isValidField('escola_codigo_postal')" [class.is-valid]="ValidInput('escola_codigo_postal')" formControlName="escola_codigo_postal">
+                            <option value="">Seleccionar</option>
+                            <option [value]="codigo['NumeroCodigoPostal'] + codigo['NumeroExtensaoCodigoPostal']" *ngFor="let codigo of codigoPostal">
+                                {{codigo['NumeroCodigoPostal']}}-{{codigo['NumeroExtensaoCodigoPostal']}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="inputWarning">Escola concelho</label>
+                        <select class="form-control" [class.is-invalid]="isValidField('escola_concelho')" [class.is-valid]="ValidInput('escola_concelho')" formControlName="escola_concelho">
+                            <option value="">Seleccionar</option>
+                            <option [value]="concelho['Nome']" *ngFor="let concelho of concelhos">
+                                {{concelho['Nome']}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="inputError">Escola telemovel</label>
+                        <input type="number" [class.is-invalid]="isValidField('escola_telemovel')" [class.is-valid]="ValidInput('escola_telemovel')" formControlName="escola_telemovel" class="form-control is-invalid" id="inputError" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+
+            <!-- input states -->
+            <div class="form-group">
+                <label class="col-form-label" for="inputSuccess">Escola freguesia</label>
+                <input type="text" [class.is-invalid]="isValidField('escola_freguesia')" [class.is-valid]="ValidInput('escola_freguesia')" formControlName="escola_freguesia" class="form-control" id="inputSuccess" placeholder="Enter...">
+            </div>
+            <div class="form-group">
+                <label class="col-form-label" for="inputError">Escola data nascimento</label>
+                <input type="number" [class.is-invalid]="isValidField('escola_data_nascimento')" [class.is-valid]="ValidInput('escola_data_nascimento')" formControlName="escola_data_nascimento" class="form-control is-invalid" id="inputError" placeholder="Enter...">
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Crear
+            </button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>

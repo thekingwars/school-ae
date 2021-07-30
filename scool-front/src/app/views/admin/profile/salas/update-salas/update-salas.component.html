@@ -1,0 +1,56 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de uma escola</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="salasUpdateForm" (ngSubmit)="onSubmit()">
+            <app-dropzone [(model)]="model" [allowedFiles]="['image/jpeg', 'image/png']"></app-dropzone>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Sala nome</label>
+                        <input type="text" formControlName="sala_nome" [class.is-invalid]="isValidField('sala_nome')" [class.is-valid]="ValidInput('sala_nome')" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Sala capacidade aconselhada</label>
+                        <input type="number" [class.is-invalid]="isValidField('sala_capacidade_aconselhada')" [class.is-valid]="ValidInput('sala_capacidade_aconselhada')" formControlName="sala_capacidade_aconselhada" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Sala capacidade maxima</label>
+                        <input type="number" [class.is-invalid]="isValidField('sala_capacidade_maxima')" [class.is-valid]="ValidInput('sala_capacidade_maxima')" formControlName="sala_capacidade_maxima" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Sala equipamento quantidade</label>
+                        <input type="number" [class.is-invalid]="isValidField('sala_equipamento_quantidade')" [class.is-valid]="ValidInput('sala_equipamento_quantidade')" formControlName="sala_equipamento_quantidade" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Escola nome</label>
+                <select class="form-control" formControlName="escolas_fk" [class.is-invalid]="isValidField('escolas_fk')" [class.is-valid]="ValidInput('escolas_fk')">
+                    <option value="">Selecção de uma escola</option>
+                    <option [value]="escola['escola_id']" *ngFor="let escola of escolas">
+                        {{escola['escola_nome']}}
+                    </option>
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Actualizar
+            </button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>

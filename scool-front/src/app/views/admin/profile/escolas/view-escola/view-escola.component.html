@@ -1,0 +1,67 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Informação sobre a escola</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="w-100 d-flex justify-content-center">
+                    <div style="height: 50%; width: 50%;">
+                        <img [src]="this.escola['escola_coordenador_foto']" class="img-fluid" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>Escola nome</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_nome']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Escola nif</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_nif']" disabled>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <!-- textarea -->
+                <div class="form-group">
+                    <label>Escola rua</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_rua']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label>Escola codigo postal</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_codigo_postal']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-form-label" for="inputSuccess">Escola data nascimento</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_data_nascimento']" disabled>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label class="col-form-label" for="inputSuccess">Escola telemovel</label>
+                    <input type="text" class="form-control" [placeholder]="this.escola['escola_telemovel']" disabled>
+                </div>
+            </div>
+        </div>
+
+        <!-- input states -->
+        <div class="form-group">
+            <label class="col-form-label" for="inputWarning">Escola freguesia</label>
+            <input type="text" class="form-control" [placeholder]="this.escola['escola_freguesia']" disabled>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Escola concelho</label>
+            <input type="text" class="form-control" [placeholder]="this.escola['escola_concelho']" disabled>
+        </div>
+    </div>
+</div>

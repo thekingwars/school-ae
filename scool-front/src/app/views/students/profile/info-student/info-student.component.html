@@ -1,0 +1,89 @@
+<div class="container-fluid">
+    <div class="row mt-5">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Quick Example</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+                    <div class="card-body">
+                        <app-dropzone [(model)]="model" [allowedFiles]="['image/jpeg', 'image/png']"></app-dropzone>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Aluno sexo</label>
+                                    <select formControlName="aluno_sexo" class="form-control" [class.is-invalid]="isValidField('aluno_sexo')" [class.is-valid]="ValidInput('aluno_sexo')">
+                                        <option value="">
+                                            Seleccionar
+                                        </option>
+                                        <option value="Maculino">
+                                            Maculino
+                                        </option>
+                                        <option value="Feminino">
+                                            Feminino
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Aluno nacionalidade</label>
+                                    <input type="text" class="form-control" formControlName="aluno_nacionalidade" class="form-control" [class.is-invalid]="isValidField('aluno_nacionalidade')" [class.is-valid]="ValidInput('aluno_nacionalidade')">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Aluno tipo doc ident</label>
+                                    <select formControlName="aluno_tipo_doc_ident" class="form-control" [class.is-invalid]="isValidField('aluno_tipo_doc_ident')" [class.is-valid]="ValidInput('aluno_tipo_doc_ident')">
+                                        <option value="">
+                                            Seleccionar
+                                        </option>
+                                        <option value="Portuguesa">
+                                            BI
+                                        </option>
+                                        <option value="Pasaporte">
+                                            Pasaporte
+                                        </option>
+                                        <option value="Pasaporte">
+                                            Carta de condução
+                                        </option>
+                                        <option value="Pasaporte">
+                                            Cartão de residência
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <label>Aluno num doc ident</label>
+                                    <input type="number" class="form-control" formControlName="aluno_num_doc_ident" class="form-control" [class.is-invalid]="isValidField('aluno_num_doc_ident')" [class.is-valid]="ValidInput('aluno_num_doc_ident')">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Aluno data nascimento</label>
+                                    <input type="date" class="form-control" formControlName="aluno_data_nascimento" class="form-control" [class.is-invalid]="isValidField('aluno_data_nascimento')" [class.is-valid]="ValidInput('aluno_data_nascimento')">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Aluno nif</label>
+                                    <input type="text" class="form-control" formControlName="aluno_nif" class="form-control" [class.is-invalid]="isValidField('aluno_nif')" [class.is-valid]="ValidInput('aluno_nif')">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

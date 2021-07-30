@@ -1,0 +1,92 @@
+$danger: red;
+$primary: #0d47a1;
+.dropzone {
+    width: 100%;
+    margin-bottom: 16px;
+    &-file {
+        width: 100%;
+        height: 200px;
+        position: relative;
+        border-style: dashed;
+        border-width: 3px;
+        border-color: rgba(0, 0, 0, 0.25);
+        background: rgba(0, 0, 0, 0.2);
+        input {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+    }
+    &-img {
+        width: 60px;
+        height: 60px;
+        border-radius: 60px;
+        margin-bottom: 16px;
+    }
+    small {
+        color: $danger;
+        margin-top: 16px;
+    }
+    &-button {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        i.ifile {
+            font-size: 40px;
+            color: rgba(0, 0, 0, 0.15);
+            margin-bottom: 16px;
+        }
+        p {
+            margin: 0 0 16px 0;
+            font-size: 14px;
+            color: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 250px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            text-align: center;
+        }
+    }
+    .file-uploaded {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 2;
+        i {
+            color: $danger;
+            margin-left: 16px;
+            font-size: 22px;
+            &:hover {
+                opacity: 0.75;
+                cursor: pointer;
+            }
+        }
+        p.uploaded {
+            font-weight: 600;
+            color: #fff;
+            margin: 0;
+        }
+    }
+    label {
+        z-index: 1;
+        height: 40px;
+        line-height: 40px;
+        padding-left: 32px;
+        padding-right: 32px;
+        border-radius: 4px;
+        background-color: $primary;
+        color: #fff;
+        font-size: 14px;
+        font-weight: 600;
+        &:hover {
+            opacity: 0.75;
+            cursor: pointer;
+        }
+    }
+}

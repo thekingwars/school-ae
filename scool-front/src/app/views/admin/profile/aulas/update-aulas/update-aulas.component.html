@@ -1,0 +1,95 @@
+<div class="col-md-10 pt-4" style="margin: 0 auto;">
+    <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Date picker</h3>
+        </div>
+        <div class="card-body">
+            <!-- Date -->
+            <form [formGroup]="aulasUpdateForm" (ngSubmit)="onSubmit()">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aulas num</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="number" formControlName="aulas_num" [class.is-invalid]="isValidField('aulas_num')" [class.is-valid]="ValidInput('aulas_num')" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aulas data</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="date" value="2017-06-01" [class.is-invalid]="isValidField('aulas_data')" [class.is-valid]="ValidInput('aulas_data')" formControlName="aulas_data" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aulas hora entrada prevista</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="time" [class.is-invalid]="isValidField('aula_hora_entrada_prevista')" [class.is-valid]="ValidInput('aula_hora_entrada_prevista')" formControlName="aula_hora_entrada_prevista" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aulas hora entrada</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="datetime-local" [class.is-invalid]="isValidField('aula_hora_entrada')" [class.is-valid]="ValidInput('aula_hora_entrada')" formControlName="aula_hora_entrada" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Date and time -->
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aulas hora sala prevista</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="time" [class.is-invalid]="isValidField('aula_hora_saida_prevista')" [class.is-valid]="ValidInput('aula_hora_saida_prevista')" formControlName="aula_hora_saida_prevista" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aula hora salida</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="datetime-local" [class.is-invalid]="isValidField('aula_hora_saida')" [class.is-valid]="ValidInput('aula_hora_saida')" formControlName="aula_hora_saida" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aula unidade</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="text" [class.is-invalid]="isValidField('aula_unidade')" [class.is-valid]="ValidInput('aula_unidade')" formControlName="aula_unidade" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label>Aula obs</label>
+                            <div class="input-group date" id="reservationdate">
+                                <input type="text" [class.is-invalid]="isValidField('aula_obs')" [class.is-valid]="ValidInput('aula_obs')" formControlName="aula_obs" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Sala nome</label>
+                    <div class="input-group date" id="reservationdate">
+                        <select [class.is-invalid]="isValidField('salas_fk')" [class.is-valid]="ValidInput('salas_fk')" formControlName="salas_fk" class="form-control">
+                            <option value="">
+                                Selecciona una sala
+                            </option>
+                            <option [value]="sala['sala_id']" *ngFor="let sala of salas">
+                                {{sala['sala_nome']}}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn btn-primary">
+                    Actualizar
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

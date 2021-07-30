@@ -1,0 +1,196 @@
+<div class="wrapper">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1>Profile</h1>
+                    </div>
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item active">User Profile</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-4" style="margin: 0 auto;">
+                        <div class="card card-primary card-outline">
+                            <div class="card-body box-profile">
+                                <div class="text-center">
+                                    <img class="profile-user-img img-fluid img-circle" [src]="student['student']['aluno_foto'] ? student['student']['aluno_foto'] : image" alt="User profile picture">
+                                    <img src="" alt="">
+                                </div>
+
+                                <h3 class="profile-username text-center">{{student['student']['aluno_nome']}}</h3>
+
+                                <p class="text-muted text-center">{{student['student']['aluno_formacao']}}</p>
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="margin: 0 auto;">
+                        <!-- Profile Image -->
+                        <!-- /.card -->
+
+                        <!-- About Me Box -->
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Aluno info</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+
+                                <p class="text-muted">
+                                    {{student['student']['aluno_email']}}
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_habilitacao']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-passport mr-1"></i> Aluno info Doc y nacionalidade</strong>
+
+                                <div>
+                                    <p class="text-muted" *ngIf="student['student']['aluno_tipo_doc_ident'] && student['student']['aluno_num_doc_ident']">{{student['student']['aluno_tipo_doc_ident']}} - {{student['student']['aluno_num_doc_ident']}}</p>
+                                    <p class="text-muted" *ngIf="student['student']['aluno_nacionalidade']">Nacionalidade: {{student['student']['aluno_nacionalidade']}}</p>
+                                </div>
+
+                                <hr>
+
+                                <strong><i class="far fa-file-alt mr-1"></i> Info Extra</strong>
+
+                                <p class="text-muted">Telemovel: {{student['student']['aluno_telemovel']}}<span *ngIf="student['student']['aluno_nif']"> - Nif: {{student['student']['aluno_nif']}}</span> - Idad: {{student['student']['aluno_idad']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-table mr-1"></i>fecha de nacimiento</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_data_nascimento'] | date: 'dd/LL/YYYY' }}</p>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                        <!-- /.card -->
+                    </div>
+
+                    <!-- /.col -->
+                </div>
+                <div class="row" *ngIf="student['student']['aluno_idad'] < 18">
+                    <div class="col-md-6" style="margin: 0 auto;">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Pai nome: {{student['student']['aluno_pai_nome']}}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+
+                                <p class="text-muted">
+                                    {{student['student']['aluno_pai_email']}}
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_pai_habilitacao']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Pai contacto</strong>
+
+                                <div>
+                                    <p class="text-muted">{{student['student']['aluno_pai_contacto']}}</p>
+                                </div>
+
+                                <hr>
+
+                                <strong><i class="far fa-file-alt mr-1"></i> Formación</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_pai_formacao']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-user-md mr-1"></i>Profesion</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_pai_profissao']}}</p>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+                    <div class="col-md-6" style="margin: 0 auto;">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Mae nome: {{student['student']['aluno_mae_nome']}}</h3>
+                            </div>
+                            <!-- /.card-header -->
+                            <div class="card-body">
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+
+                                <p class="text-muted">
+                                    {{student['student']['aluno_pai_email']}}
+                                </p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_mae_habilitacao']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-pencil-alt mr-1"></i> Pai contacto</strong>
+
+                                <div>
+                                    <p class="text-muted">{{student['student']['aluno_mae_contacto']}}</p>
+                                </div>
+
+                                <hr>
+
+                                <strong><i class="far fa-file-alt mr-1"></i> Formación</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_mae_formacao']}}</p>
+
+                                <hr>
+
+                                <strong><i class="fas fa-user-md mr-1"></i>Profesion</strong>
+
+                                <p class="text-muted">{{student['student']['aluno_mae_profissao']}}</p>
+
+                            </div>
+                            <!-- /.card-body -->
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+            </div>
+            <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->

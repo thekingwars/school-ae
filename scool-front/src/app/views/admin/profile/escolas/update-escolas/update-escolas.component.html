@@ -1,0 +1,46 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de uma escola</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="escolaUpdateForm" (ngSubmit)="onSubmit()">
+            <app-dropzone [(model)]="model" [allowedFiles]="['image/jpeg', 'image/png']"></app-dropzone>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Escola rua</label>
+                        <input type="text" formControlName="escola_rua" [class.is-invalid]="isValidField('escola_rua')" [class.is-valid]="ValidInput('escola_rua')" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Escola freguesia</label>
+                        <input type="text" [class.is-invalid]="isValidField('escola_freguesia')" [class.is-valid]="ValidInput('escola_freguesia')" formControlName="escola_freguesia" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- textarea -->
+                    <div class="form-group">
+                        <label>Escola data nascimento</label>
+                        <input type="text" [class.is-invalid]="isValidField('escola_data_nascimento')" [class.is-valid]="ValidInput('escola_data_nascimento')" formControlName="escola_data_nascimento" class="form-control" placeholder="Enter...">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Escola telemovel</label>
+                        <input type="number" [class.is-invalid]="isValidField('escola_telemovel')" [class.is-valid]="ValidInput('escola_telemovel')" formControlName="escola_telemovel" class="form-control is-invalid" id="inputError" placeholder="Enter...">
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">
+                Actualizar
+            </button>
+        </form>
+    </div>
+    <!-- /.card-body -->
+</div>
