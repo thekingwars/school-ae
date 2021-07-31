@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/guards/auth.guard';
+import { ProfessorGuard } from 'src/app/guards/professor.guard';
 import { ProfileSidebarComponent } from '../students/profile/profile-sidebar/profile-sidebar.component';
+import { ForgoutPasswordComponent } from './auth/forgout-password/forgout-password.component';
 import { LoginComponent } from './auth/login/login.component';
+import { NewPasswordComponent } from './auth/new-password/new-password.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { VerifyCodeEmailComponent } from './auth/verify-code-email/verify-code-email.component';
 import { CandidaturaComponent } from './profile/candidatura/candidatura.component';
@@ -21,8 +24,16 @@ const routes: Routes = [
         path: 'VerifyCode', component: VerifyCodeEmailComponent
       },
       {
+        path: 'forgoutPassword',
+        component: ForgoutPasswordComponent
+      },
+      {
+        path: 'new-password/:token',
+        component: NewPasswordComponent
+      },
+      {
         path: 'profile',
-        canActivate: [AuthGuard],
+        canActivate: [AuthGuard, ProfessorGuard],
         component: ProfileSidebarComponent,
         children: [
           {

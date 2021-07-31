@@ -10,6 +10,8 @@ import { VerifyCodeEmailComponent } from './auth/verify-code-email/verify-code-e
 import { ReactiveFormsModule } from '@angular/forms';
 import { CandidaturaComponent } from './profile/candidatura/candidatura.component';
 import { ComponentsModule } from 'src/app/components/components.module';
+import { ForgoutPasswordComponent } from './auth/forgout-password/forgout-password.component';
+import { NewPasswordComponent } from './auth/new-password/new-password.component';
 
 
 @NgModule({
@@ -17,7 +19,9 @@ import { ComponentsModule } from 'src/app/components/components.module';
     LoginComponent,
     RegisterComponent,
     VerifyCodeEmailComponent,
-    CandidaturaComponent
+    CandidaturaComponent,
+    ForgoutPasswordComponent,
+    NewPasswordComponent
   ],
   imports: [
     CommonModule,

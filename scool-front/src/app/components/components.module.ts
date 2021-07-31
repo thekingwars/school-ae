@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 
 import { SidebarAdminComponent } from './sidebar-admin/sidebar-admin.component';
 import { DropzoneComponent } from './dropzone/dropzone.component';
+import { LoaderComponent } from './loader/loader.component';
 
 
 @NgModule({
   declarations: [
     SidebarAdminComponent,
-    DropzoneComponent
+    DropzoneComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -20,7 +22,8 @@ import { DropzoneComponent } from './dropzone/dropzone.component';
   ],
   exports: [
     SidebarAdminComponent,
-    DropzoneComponent
+    DropzoneComponent,
+    LoaderComponent
   ]
 })
 export class ComponentsModule { }

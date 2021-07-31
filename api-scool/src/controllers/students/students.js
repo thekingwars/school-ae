@@ -27,7 +27,7 @@ export const infoUserExtra = async(req, res) => {
     const { aluno_sexo, aluno_nacionalidade, aluno_tipo_doc_ident, aluno_num_doc_ident, aluno_data_nascimento, aluno_nif } = req.body
     const file = req.file
 
-    if (!aluno_sexo || !aluno_nacionalidade || !aluno_tipo_doc_ident || !aluno_num_doc_ident || !aluno_data_nascimento || !aluno_nif || !file) {
+    if (!aluno_sexo || !aluno_nacionalidade || !aluno_tipo_doc_ident || !aluno_num_doc_ident || !aluno_data_nascimento || !aluno_nif) {
         return res.status(401).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
@@ -38,7 +38,7 @@ export const infoUserExtra = async(req, res) => {
         aluno_num_doc_ident,
         aluno_data_nascimento,
         aluno_nif,
-        aluno_foto: `http://localhost:3000/${file.filename}`
+        aluno_foto: !file ? null : `http://localhost:3200/${file.filename}`
     }
 
     let sql = 'UPDATE alunos SET ? WHERE aluno_id = ?'

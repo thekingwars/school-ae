@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { format } from 'date-fns';
 import { EscolasService } from 'src/app/services/admin/escolas.service';
 import Swal from 'sweetalert2';
 
@@ -41,7 +42,7 @@ export class UpdateAulasComponent implements OnInit {
 
   getEscolas(){
     this.escolaService.allSalas().subscribe(res => {
-      this.salas = res['salas']
+      this.salas = res
     }, err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })
@@ -51,13 +52,15 @@ export class UpdateAulasComponent implements OnInit {
     this.escolaService.getAulas(id).subscribe(res => {
       this.aulasUpdateForm.patchValue({
         aulas_num: res['aulas']['aulas_num'],
+        aulas_data: format(new Date(res.aulas.aulas_data), 'yyyy-MM-dd'),
+        aula_hora_entrada: format(new Date(res.aulas.aula_hora_entrada), `yyyy-MM-dd'T'HH:mm:ss`),
+        aula_hora_saida: format(new Date(res.aulas.aula_hora_saida), `yyyy-MM-dd'T'HH:mm:ss`),
         aula_hora_entrada_prevista: res['aulas']['aula_hora_entrada_prevista'],
         aula_hora_saida_prevista: res['aulas']['aula_hora_saida_prevista'],
         aula_unidade: res['aulas']['aula_unidade'],
         aula_obs: res['aulas']['aula_obs'],
         salas_fk: res['aulas']['salas_fk']
       })
-      console.log(res)
     })
   }
 

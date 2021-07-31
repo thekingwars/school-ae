@@ -53,23 +53,6 @@ export class CreateEscolasComponent implements OnInit {
     })
   }
 
-  getErrorMessage(field: string) {
-    let error = this.escolaForm.get(field);
-    let message;
-
-    if (error.errors.required) {
-      message = 'El campo es requerido';
-    }
-    if (error.hasError('minlength')) {
-      message = 'Debe colocar un minimo de 6 caracteres';
-    }
-    if (error.hasError('pattern')) {
-      message = 'El email es invalido';
-    }
-
-    return message;
-  }
-
   ValidInput(field: string){
     const valid = this.escolaForm.get(field).valid
 

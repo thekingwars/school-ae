@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { StudentsService } from 'src/app/services/students/students.service';
+import { format } from 'date-fns'
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -22,6 +24,7 @@ export class InfoStudentComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.patchValueForm(this.id)
   }
   
   formFb(){
@@ -40,6 +43,19 @@ export class InfoStudentComponent implements OnInit {
 
     return valid
   }
+
+  patchValueForm(id){
+    this.studentService.getStudents(id).subscribe(res => {
+      this.studentForm.patchValue({
+        aluno_sexo: res.student.aluno_sexo,
+        aluno_nacionalidade: res.student.aluno_nacionalidade,
+        aluno_tipo_doc_ident: res.student.aluno_tipo_doc_ident,
+        aluno_num_doc_ident: res.student.aluno_num_doc_ident,
+        aluno_nif: res.student.aluno_nif,
+        aluno_data_nascimento: format( new Date(res.student.aluno_data_nascimento), 'yyyy-MM-dd' )
+      })
+    })
+  } 
 
   isValidField(field: string) {
     const error = this.studentForm.get(field);

@@ -27,7 +27,7 @@ export class SidebarComponent implements OnInit {
   getUser(): void {
     this.studentServices.getUser().subscribe(res => {
       this.user = res['id']
-      this.role = res['user']['aluno_role'] || res['user']['professores_role']
+      this.role = res['user']['aluno_role'] || res['user']['professores_role'] || res['user']['admin_role']
       this.age = res['user']['aluno_idad']
       this.professore_verificado = res['user']['professore_verificado']
       this.sidebarElements()
@@ -37,119 +37,194 @@ export class SidebarComponent implements OnInit {
   sidebarElements(){
     switch(this.role){
       case 'aluno':
-        if(this.age > 18){
-          this.sidebarItems = [
-            {
-              title: 'Profile',
-              icon: 'nav-icon fas fa-users',
-              children: [
-                {
-                  title: 'Profile User',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/students/profile/user/${id}`
-                  }
-                  
-                },
-                {
-                  title: 'Profile User Update',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/students/profile/user/infoStudent/${id}`
-                  }
-                  
-                },
-              ]
-            },
-            {
-              title: 'Equis cosa',
-              icon: ''
-            }
-          ]
-        }
-        else{
-          this.sidebarItems = [
-            {
-              title: 'Profile',
-              icon: 'nav-icon fas fa-users',
-              children: [
-                {
-                  title: 'Profile User',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/students/profile/user/${id}`
-                  }
-                  
-                },
-                {
-                  title: 'Family User',
-                  icon: 'nav-icon far fa-user',
-                  routerLink: (id) => {
-                    return `/students/profile/family/user/${id}`
-                  }
-                },
-                {
-                  title: 'Profile User Update',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/students/profile/user/infoStudent/${id}`
-                  }
-                  
-                },
-              ]
-            },
-            {
-              title: 'Equis cosa',
-              icon: ''
-            }
-          ]
-        }
+        this.isAluno()
         break;
       case 'professore':
-        if(this.professore_verificado == false){
-          this.sidebarItems = [
-            {
-              title: 'Profile',
-              icon: 'nav-icon fas fa-users',
-              children: [
-                {
-                  title: 'Perfil Professore',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/teachers/profile/user/${id}`
-                  }
-                  
-                },
-                {
-                  title: 'Candidatura Professore',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/teachers/profile/candidatura/user/${id}`
-                  }
-                },
-              ]
-            },
-          ]
-        }
-        else{
-          this.sidebarItems = [
-            {
-              title: 'Perfil',
-              icon: 'nav-icon fas fa-users',
-              children: [
-                {
-                  title: 'Perfil Professore',
-                  icon: 'nav-icon far fa-user',
-                  routerLink:(id) => {
-                    return `/teachers/profile/user/${id}`
-                  }
-                },
-              ]
-            },
-          ]
-        }
+        this.isProfessor()
+        break
+
+      case 'superadmin' || 'admin' || 'operator':
+        this.isAdmin()
+        break
     }
 
+  }
+
+
+  isAluno(){
+    if(this.age > 18){
+      this.sidebarItems = [
+        {
+          title: 'Profile',
+          icon: 'nav-icon fas fa-users',
+          children: [
+            {
+              title: 'Profile User',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/students/profile/user/${id}`
+              }
+              
+            },
+            {
+              title: 'Profile User Update',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/students/profile/user/infoStudent/${id}`
+              }
+              
+            },
+          ]
+        },
+        {
+          title: 'Equis cosa',
+          icon: ''
+        }
+      ]
+    }
+    else{
+      this.sidebarItems = [
+        {
+          title: 'Profile',
+          icon: 'nav-icon fas fa-users',
+          children: [
+            {
+              title: 'Profile User',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/students/profile/user/${id}`
+              }
+              
+            },
+            {
+              title: 'Family User',
+              icon: 'nav-icon far fa-user',
+              routerLink: (id) => {
+                return `/students/profile/family/user/${id}`
+              }
+            },
+            {
+              title: 'Profile User Update',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/students/profile/user/infoStudent/${id}`
+              }
+              
+            },
+          ]
+        },
+        {
+          title: 'Equis cosa',
+          icon: ''
+        }
+      ]
+    }
+  }
+
+  isProfessor(){
+    if(this.professore_verificado == false){
+      this.sidebarItems = [
+        {
+          title: 'Profile',
+          icon: 'nav-icon fas fa-users',
+          children: [
+            {
+              title: 'Perfil Professore',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/teachers/profile/user/${id}`
+              }
+              
+            },
+            {
+              title: 'Candidatura Professore',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/teachers/profile/candidatura/user/${id}`
+              }
+            },
+          ]
+        },
+      ]
+    }
+    else{
+      this.sidebarItems = [
+        {
+          title: 'Perfil',
+          icon: 'nav-icon fas fa-users',
+          children: [
+            {
+              title: 'Perfil Professore',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/teachers/profile/user/${id}`
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+
+  isAdmin(){
+    if(this.role === 'superadmin'){
+      this.sidebarItems = [
+        {
+          title: 'Escolas',
+          icon: 'nav-icon fas fa-users',
+          children: [
+            {
+              title: 'Escolas',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/admin/profile/escolas`
+              }
+            },
+            {
+              title: 'Aulas',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/admin/profile/aulas`
+              }
+            },
+            {
+              title: 'Salas',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/admin/profile/salas`
+              }
+            },
+            {
+              title: 'instalacoes',
+              icon: 'nav-icon far fa-user',
+              routerLink:(id) => {
+                return `/admin/profile/instalacoes`
+              }
+            },
+          ]
+        },
+        {
+          title: 'Livros',
+          icon: "nav-icon fas fa-book",
+          children: [
+            {
+              title: 'Ver livros',
+              icon: 'nav-icon fas fa-book-open',
+              routerLink:(id) => {
+                return `/admin/profile/livros`
+              }
+            },
+            {
+              title: 'Estado livros',
+              icon: 'nav-icon fas fa-bookmark',
+              routerLink:(id) => {
+                return `/admin/profile/estado-livros`
+              }
+            }         
+          ]
+        }
+      ]
+    }
   }
 
 /*   profileUser(): void {

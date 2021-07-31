@@ -4,7 +4,7 @@ import db from '../db'
 
 export const notToken = (req, res, next) => {
     if (!req.headers.authorization) {
-        res.status(401).json({ msg: "Acceso no autorizado" })
+        res.status(401).json({ err: "Acceso no autorizado" })
     } else {
         let token = req.headers.authorization.split(" ")[1]
 
@@ -29,11 +29,13 @@ export const verifyCode = async(req, res, next) => {
 
     const fk = await db.query(sql, req.decode.id)
 
+    console.log(fk)
+
     if (fk.length === 0) {
-        res.status(400).json({ msg: "Error con el usuario" })
+        res.status(400).json({ err: "Error con el usuario" })
     } else {
         if (fk[0].valEmail == false && fk[0].valTelf == false) {
-            res.status(401).json({ msg: "Acceso no autorizado, debes validar tu correo y telefono" })
+            res.status(406).json({ err: "Acceso no autorizado, debes validar tu correo y telefono" })
         } else {
             next();
         }
@@ -48,10 +50,10 @@ export const verifyCodeEmail = async(req, res, next) => {
     const fk = await db.query(sql, req.decode.id)
 
     if (fk.length === 0) {
-        res.status(400).json({ msg: "Error con el usuario" })
+        res.status(400).json({ err: "Error con el usuario" })
     } else {
         if (fk[0].valEmail == false) {
-            res.status(401).json({ msg: "Acceso no autorizado, debes validar tu correo" })
+            res.status(401).json({ err: "Acceso no autorizado, debes validar tu correo" })
         } else {
             next();
         }

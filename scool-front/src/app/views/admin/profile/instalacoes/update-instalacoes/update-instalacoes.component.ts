@@ -43,8 +43,7 @@ export class UpdateInstalacoesComponent implements OnInit {
 
   getEscolas(){
     this.escolaService.allEscolas().subscribe(res => {
-      this.escolas = res['escolas']
-      console.log(this.escolas)
+      this.escolas = res
     }, err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })

@@ -1,7 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import format from 'date-fns/format';
 import { Observable, ObservableLike } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { Aulas } from 'src/app/models/aulas.models';
 import { Escolas } from 'src/app/models/escolas.models';
 import { environment } from '../../../environments/environment' 
 import { StudentsService } from '../students/students.service';
@@ -31,13 +33,17 @@ export class EscolasService {
     )
   }
 
-  allEscolas(): Observable<Escolas>{
+  allEscolas(): Observable<any>{
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
 
-    return this.http.get<Escolas>(`${this.api}/admin/all/escolas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/escolas`, {headers}).pipe(
+      map(res => {
+        return res['escolas']
+      })
+    )
   }
 
   getEscolas(id: number): Observable<Escolas>{
@@ -81,13 +87,17 @@ export class EscolasService {
     return this.http.post<object>(`${this.api}/admin/create/instalacoes`, instalacoes, {headers})
   }
 
-  allInstalacoes():Observable<object>{
+  allInstalacoes():Observable<any>{
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
 
-    return this.http.get<object>(`${this.api}/admin/all/instalacoes`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/instalacoes`, {headers}).pipe(
+      map(res => {
+        return res['instalacoes']
+      })
+    )
   }
 
   getInstalacoes(id: number):Observable<object>{
@@ -123,11 +133,15 @@ export class EscolasService {
     return this.http.post<object>(`${this.api}/admin/create/salas`, salas, {headers})
   }
 
-  allSalas():Observable<object>{
+  allSalas():Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.get<object>(`${this.api}/admin/all/salas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/salas`, {headers}).pipe(
+      map(res => {
+        return res['salas']
+      })
+    )
   }
 
   getSalas(id: number):Observable<object>{
@@ -153,39 +167,43 @@ export class EscolasService {
 
   //Aulas
 
-  createAulas(aulas): Observable<object>{
+  createAulas(aulas): Observable<Aulas>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.post<object>(`${this.api}/admin/create/aulas`, aulas, {headers})
+    return this.http.post<Aulas>(`${this.api}/admin/create/aulas`, aulas, {headers})
   }
 
   
-  allAulas():Observable<object>{
+  allAulas():Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.get<object>(`${this.api}/admin/all/aulas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/aulas`, {headers}).pipe( 
+      map( res => {
+        return res['aulas']
+      } )
+     )
   }
 
-  getAulas(id: number):Observable<object>{
+  getAulas(id: number):Observable<Aulas>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.get<object>(`${this.api}/admin/get/aulas/${id}`, {headers})
+    return this.http.get<Aulas>(`${this.api}/admin/get/aulas/${id}`, {headers})
   }
 
-  updateAulas(aula, id: number): Observable<object>{
+  updateAulas(aula: Aulas, id: number): Observable<object>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.patch<object>(`${this.api}/admin/update/aulas/${id}`, aula, {headers})
+    return this.http.patch<Aulas>(`${this.api}/admin/update/aulas/${id}`, aula, {headers})
   }
 
-  deleteAulas(id: number): Observable<object>{
+  deleteAulas(id: number): Observable<Aulas>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.delete<object>(`${this.api}/admin/delete/aulas/${id}`, {headers})
+    return this.http.delete<Aulas>(`${this.api}/admin/delete/aulas/${id}`, {headers})
   }
 }

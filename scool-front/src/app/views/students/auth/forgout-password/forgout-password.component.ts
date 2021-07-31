@@ -31,13 +31,10 @@ export class ForgoutPasswordComponent implements OnInit {
     let message;
 
     if (error.errors.required) {
-      message = 'El campo es requerido';
-    }
-    if (error.hasError('minlength')) {
-      message = 'Debe colocar un minimo de 6 caracteres';
+      message = 'O campo é obrigatório';
     }
     if (error.hasError('pattern')) {
-      message = 'El email es invalido';
+      message = 'O e-mail é inválido';
     }
 
     return message;

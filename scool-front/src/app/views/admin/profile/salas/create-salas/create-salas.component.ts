@@ -12,14 +12,15 @@ import Swal from 'sweetalert2';
 })
 export class CreateSalasComponent implements OnInit {
 
-  model = null
+  model: File = null
   salasForm: FormGroup
   escolas: Escolas[] = []
 
-  constructor(private fb: FormBuilder, private router: Router, private escolaServices: EscolasService) { }
+  constructor(private fb: FormBuilder, private router: Router, private escolaServices: EscolasService) {
+    this.formSalas()
+  }
 
   ngOnInit(): void {
-    this.formSalas()
     this.getEscolas()
   }
 
@@ -36,8 +37,8 @@ export class CreateSalasComponent implements OnInit {
 
   getEscolas(){
     this.escolaServices.allEscolas().subscribe(res => {
-      console.log(res['escolas'])
-      this.escolas = res['escolas']
+      console.log(res)
+      this.escolas = res
     }, err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })
@@ -72,16 +73,16 @@ export class CreateSalasComponent implements OnInit {
   }
 
   onSubmit(){
+    this.salasForm.patchValue({sala_foto: this.model})
     const form: FormData = new FormData()
     const controls = this.salasForm.controls
-    this.salasForm.patchValue({sala_foto: this.model})
 
     form.append('sala_nome', controls['sala_nome'].value)
     form.append('sala_capacidade_aconselhada', controls['sala_capacidade_aconselhada'].value)
     form.append('sala_capacidade_maxima', controls['sala_capacidade_maxima'].value)
     form.append('sala_equipamento_quantidade', controls['sala_equipamento_quantidade'].value)
     form.append('escolas_fk', controls['escolas_fk'].value)
-    form.append('sala_foto', this.salasForm.controls['sala_foto'].value, this.salasForm.controls['sala_foto'].value['name'])
+    form.append('sala_foto', this.salasForm.controls['sala_foto'].value)
 
     this.escolaServices.createSalas(form).subscribe(res => {
       this.router.navigateByUrl('/admin/profile/salas')
