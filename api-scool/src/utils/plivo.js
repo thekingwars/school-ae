@@ -1,7 +1,7 @@
 import { Client } from 'plivo'
 
 export const clientPlivo = async(src, dst, text) => {
-    let client = new Client('MAYJK1MDC3ZTDHYZBJMZ', 'ZDYwNzJmMWZiZGNhMzVhM2RkZDdhYWYwNzQ3NmM0')
+    let client = new Client(process.env.PLIVO_AUTH_ID, process.env.PLIVO_AUTH_TOKEN)
 
     let message = await client.messages.create(src, dst, text)
 
