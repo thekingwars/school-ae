@@ -25,18 +25,18 @@ export const register = async(req, res) => {
     }
 
     if (!aluno_nome || !aluno_telemovel || !aluno_habilitacao || !aluno_formacao || !aluno_email || !aluno_password || !aluno_idad) {
-        return res.status(400).json({ ok: false, err: 'Campos requeridos' })
+        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
     if (aluno_password.length < 6) {
-        return res.status(406).json({ ok: false, err: 'La contraseña minimo debe tener 6 caracteres' })
+        return res.status(406).json({ ok: false, err: 'A senha mínima deve ter 6 caracteres' })
     }
 
     let emailTable = await db.query(verifyEmail, aluno_email)
 
     if (emailTable.length > 0) {
         if (emailTable[0].aluno_email === aluno_email) {
-            return res.status(406).json({ ok: false, err: 'correo existente' });
+            return res.status(406).json({ ok: false, err: 'correio existente' });
         }
     }
 
@@ -47,19 +47,19 @@ export const register = async(req, res) => {
     const student = await db.query(sql, data)
 
     let token = jwt.sign({ id: student.insertId }, 'mySecretKey', {
-        expiresIn: 43200
+        expiresIn: '2190h'
     })
 
     await transporter.sendMail({
         from: '"School App👻" <carlosguerra2001.2@gmail.com>', // sender address
         to: aluno_email, // list of receivers
         subject: "Hello ✔", // Subject line
-        html: `Verificar correo numero ${numeroAleatorio}`
+        html: `Verificar o número de correio ${numeroAleatorio}`
     });
 
-    clientPlivo('SCHOOL', `${aluno_telemovel}`, `Su codigo de verificacion de sms es: ${numeroAleatorio2}`)
+    clientPlivo('SCHOOL', `${aluno_telemovel}`, `O seu código de verificação sms é: ${numeroAleatorio2}`)
 
-    return res.status(201).json({ ok: true, token, msg: 'Se ha enviado un codigo de verificacion al correo y telefono' })
+    return res.status(201).json({ ok: true, token, msg: 'Foi enviado um código de verificação para o seu e-mail e número de telefone.' })
 }
 
 export const login = async(req, res) => {
@@ -69,7 +69,7 @@ export const login = async(req, res) => {
     const student_email = await db.query(verifyEmail, aluno_email)
 
     if (student_email.length === 0) {
-        return res.status(400).json({ ok: 'false', err: 'correo inexistente, por favor registrese' });
+        return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
         if (comparePassword(aluno_password, student_email[0].aluno_password)) {
             let token = jwt.sign({ id: student_email[0].aluno_id, user: student_email[0] }, 'mySecretKey', {
@@ -77,7 +77,7 @@ export const login = async(req, res) => {
             })
             return res.status(201).json({ ok: true, token, student: student_email[0] })
         } else {
-            return res.status(401).json({ ok: 'false', err: 'Contraseña incorrecta' })
+            return res.status(401).json({ ok: 'false', err: 'Senha incorrecta' })
         }
     }
 }
@@ -86,7 +86,7 @@ export const verifyEmail = async(req, res) => {
     const { EmailCode } = req.body
 
     if (!EmailCode) {
-        return res.status(400).json({ ok: false, err: 'Campos requeridos' })
+        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
     let sql = 'SELECT * FROM valida WHERE EmailCode = ?'
@@ -94,14 +94,14 @@ export const verifyEmail = async(req, res) => {
     const codeEmail = await db.query(sql, EmailCode)
 
     if (codeEmail.length === 0) {
-        return res.status(400).json({ ok: 'false', err: 'No has recibido ningun correo' });
+        return res.status(400).json({ ok: 'false', err: 'Não recebeu nenhum correio' });
     } else {
         if (codeEmail[0].EmailCode) {
             let sql2 = `UPDATE valida set valEmail = '1' WHERE EmailCode = ?`
 
             const verify = await db.query(sql2, EmailCode)
 
-            return res.status(201).json({ ok: true, verify, mgs: 'Correo verificado con exito' })
+            return res.status(201).json({ ok: true, verify, mgs: 'Correio verificado com sucesso' })
         }
     }
 }
@@ -110,7 +110,7 @@ export const verifyPhone = async(req, res) => {
     const { PhoneCode } = req.body
 
     if (!PhoneCode) {
-        return res.status(400).json({ ok: false, err: 'Campos requeridos' })
+        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
     let sql = 'SELECT * FROM valida WHERE PhoneCode = ?'
@@ -118,14 +118,14 @@ export const verifyPhone = async(req, res) => {
     const codePhone = await db.query(sql, PhoneCode)
 
     if (codePhone.length === 0) {
-        return res.status(400).json({ ok: 'false', err: 'No has recibido ningun mensaje' });
+        return res.status(400).json({ ok: 'false', err: 'Não recebeu nenhuma mensagem' });
     } else {
         if (codePhone[0].PhoneCode) {
             let sql2 = `UPDATE valida set valTelf = '1' WHERE PhoneCode = ?`
 
             const verify = await db.query(sql2, PhoneCode)
 
-            return res.status(201).json({ ok: true, verify, mgs: 'Telefono verificado con Exito' })
+            return res.status(201).json({ ok: true, verify, mgs: 'Telefone verificado com Exito' })
         }
     }
 }
@@ -136,19 +136,19 @@ export const forgoutPassword = async(req, res) => {
 
 
     if (!aluno_email) {
-        return res.status(400).json({ ok: 'false', err: 'El correo es necesario' })
+        return res.status(400).json({ ok: 'false', err: 'O correio é necessário' })
     }
 
     const email = await db.query(sql, aluno_email)
 
     if (email.length === 0) {
-        return res.status(400).json({ ok: 'false', err: 'correo inexistente, por favor registrese' });
+        return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
         let token = jwt.sign({ user: email[0].aluno_id }, 'mySecretKey', {
             expiresIn: '5min'
         })
 
-        let direcction = `localhost:4200/new-password/${token}`
+        let direcction = `localhost:4200/students/new-password/${token}`
 
         // send mail with defined transport object
         await transporter.sendMail({
@@ -164,7 +164,7 @@ export const forgoutPassword = async(req, res) => {
             `, // html body
         });
 
-        return res.status(201).json({ ok: true, token, msg: 'Se ha enviado un correo' })
+        return res.status(201).json({ ok: true, token, msg: 'Foi enviado um e-mail' })
     }
 }
 
@@ -175,11 +175,11 @@ export const recoverPassword = async(req, res) => {
     let sql = 'UPDATE alunos set ? WHERE aluno_id = ?'
 
     if (!repeatPassword || !newPassword) {
-        return res.status(400).json({ ok: false, err: 'Campos requeridos' });
+        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
     }
 
     if (repeatPassword !== newPassword) {
-        return res.status(400).json({ ok: false, err: 'Las contraseñas no coinciden' });
+        return res.status(400).json({ ok: false, err: 'As palavras-passe não coincidem' });
     }
 
     let newEncryptPassword = passwordEncrypt(newPassword)
@@ -191,11 +191,11 @@ export const recoverPassword = async(req, res) => {
 
     jwt.verify(token, 'mySecretKey', async(err, decode) => {
         if (err) {
-            res.status(500).json({ err: 'Token invalido o expirado, por favor pida cambio de contraseña otra vez' })
+            res.status(500).json({ err: 'Ficha inválida ou expirada, por favor peça uma nova alteração de senha.' })
         } else {
             const password = await db.query(sql, [data, decode.user])
 
-            return res.status(201).json({ ok: true, msg: 'Contraseña actualizada con exito', password })
+            return res.status(201).json({ ok: true, msg: 'Senha actualizada com sucesso', password })
         }
     })
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StudentsService } from 'src/app/services/students/students.service';
 import sweet from 'sweetalert2'
@@ -12,7 +12,7 @@ import sweet from 'sweetalert2'
 export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
-  reggexEmail: RegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/
+  private reggexEmail: RegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/
   private reggexLetras: RegExp = /^([a-zA-Z ]+)(\s[a-zA-Z ]+)*$/
   number: number[];
 
@@ -32,8 +32,24 @@ export class RegisterComponent implements OnInit {
       aluno_formacao: new FormControl('', [Validators.required, Validators.pattern(this.reggexLetras)]),
       aluno_email: new FormControl('', [Validators.required, Validators.pattern(this.reggexEmail)]),
       aluno_password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      aluno_password2: new FormControl('', [Validators.required, Validators.minLength(6)]),
       aluno_idad: new FormControl('', [Validators.required])
+    }, {
+      validators: this.validarQueSeanIguales
     })
+  }
+
+  checarSiSonIguales(): boolean {
+    return this.registerForm.hasError('noSonIguales') &&
+      this.registerForm.get('aluno_password').dirty &&
+      this.registerForm.get('aluno_password2').dirty;
+  }
+
+  validarQueSeanIguales: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+    const password = control.get('aluno_password');
+    const confirmarPassword = control.get('aluno_password2');
+  
+    return password.value === confirmarPassword.value ? null : { 'noSonIguales': true };
   }
 
   getErrorMessage(field: string): string {

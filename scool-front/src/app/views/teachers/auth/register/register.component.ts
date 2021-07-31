@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/teachers/auth.service';
 import Swal from 'sweetalert2';
@@ -30,8 +30,24 @@ export class RegisterComponent implements OnInit {
       professor_habilitacao: new FormControl('', [Validators.required]),
       professor_formacao: new FormControl('', [Validators.required, Validators.pattern(this.reggexLetras)]),
       professores_email: new FormControl('', [Validators.required, Validators.pattern(this.reggexEmail)]),
-      professores_password: new FormControl('', [Validators.required, Validators.minLength(6)])
+      professores_password: new FormControl('', [Validators.required, Validators.minLength(6)]),
+      professores_password2: new FormControl('',[Validators.required, Validators.minLength(6)])
+    }, {
+      validators: this.validarQueSeanIguales
     })
+  }
+
+  checarSiSonIguales(): boolean {
+    return this.registerForm.hasError('noSonIguales') &&
+      this.registerForm.get('professores_password').dirty &&
+      this.registerForm.get('professores_password2').dirty;
+  }
+
+  validarQueSeanIguales: ValidatorFn = (control: FormGroup): ValidationErrors | null => {
+    const password = control.get('professores_password');
+    const confirmarPassword = control.get('professores_password2');
+  
+    return password.value === confirmarPassword.value ? null : { 'noSonIguales': true };
   }
 
   getErrorMessage(field: string): string {

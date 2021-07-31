@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Aulas } from 'src/app/models/aulas.models';
 import { EscolasService } from 'src/app/services/admin/escolas.service';
 
 @Component({
@@ -7,8 +8,8 @@ import { EscolasService } from 'src/app/services/admin/escolas.service';
   styleUrls: ['./aulas-index.component.scss']
 })
 export class AulasIndexComponent implements OnInit {
-  aulas: object[]
-
+  aulas: Aulas[] = []
+ 
   constructor(private escolaServices: EscolasService) { }
 
   ngOnInit(): void {
@@ -17,8 +18,8 @@ export class AulasIndexComponent implements OnInit {
 
   getAulas(){
     this.escolaServices.allAulas().subscribe(res => {
-      this.aulas = res['aulas']
-      console.log(res['aulas'])
+      this.aulas = res
+      console.log(this.aulas)
     })
   }
 

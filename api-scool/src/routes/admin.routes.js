@@ -6,10 +6,14 @@ import { createInstalacoes, deleteInstalacoes, findAllInstalacoes, findInstalaco
 import { createSalas, deleteSalas, findAllSalas, findSalas, updateSalas, uploaderSala } from '../controllers/admin/escolas/salas.controller';
 import { createLivroEstado, deleteLivroEstado, findAllLivroEstado, findLivroEstado, updateLivroEstado } from '../controllers/admin/livros/estado_livros.controller';
 import { createLivros, deleteLivros, findAllLivros, findLivros, updateLivros } from '../controllers/admin/livros/livros.controller';
+import { loginAdmin } from '../controllers/admin/register/loginSuperadmin.controllers';
 import { notToken } from '../middlewares/auth.middleware';
 
 
 const router = Router();
+
+//login
+router.post('/login', loginAdmin)
 
 //equipamentos
 router.post('/create/equipamentos', [], createEquipamentos);
@@ -54,10 +58,10 @@ router.patch('/update/estadoLivros/:id', [], updateLivroEstado);
 router.delete('/delete/estadoLivros/:id', [], deleteLivroEstado)
 
 //livros
-router.post('/create/livros', [], createLivros)
-router.get('/all/livros', [], findAllLivros)
-router.get('/get/livros/:id', [], findLivros)
-router.patch('/update/livros/:id', [], updateLivros)
-router.delete('/delete/livros/:id', [], deleteLivros)
+router.post('/create/livros', [notToken], createLivros)
+router.get('/all/livros', [notToken], findAllLivros)
+router.get('/get/livros/:id', [notToken], findLivros)
+router.patch('/update/livros/:id', [notToken], updateLivros)
+router.delete('/delete/livros/:id', [notToken], deleteLivros)
 
 export default router;

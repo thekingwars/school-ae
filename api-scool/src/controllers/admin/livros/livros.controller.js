@@ -41,7 +41,9 @@ export const findAllLivros = async(req, res) => {
         	    FROM livros a1 JOIN estado_livros b1 ON a1.estado_livro_fk = b1.estado_livro_id
                 ORDER BY livro_id`;
 
-    livros = await addSql(sql);
+    let sqlextra = `SELECT * FROM livros`
+
+    livros = await addSql(sqlextra);
 
     return res.status(200).json({ ok: true, livros });
 }

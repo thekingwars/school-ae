@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AlunoGuard } from 'src/app/guards/aluno.guard';
 import { AuthGuard } from 'src/app/guards/auth.guard';
 import { CodeEmailComponent } from './auth/code-email/code-email.component';
 import { CodePhoneComponent } from './auth/code-phone/code-phone.component';
@@ -43,7 +44,7 @@ const routes: Routes = [
         },
         {
           path: 'profile',
-          canActivate: [AuthGuard],
+          canActivate: [AuthGuard, AlunoGuard],
           component: ProfileSidebarComponent,
           children: [
             {

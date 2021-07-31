@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
       console.log(res)
       this.router.navigateByUrl(`/teachers/profile/user/${res['professor']['professor_id']}`)
     }, err => {
-      Swal.fire('Error', err['err']['error'], 'error')
+      Swal.fire('Error', err['error']['err'], 'error')
     })
   }
 }

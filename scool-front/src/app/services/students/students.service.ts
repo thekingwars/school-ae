@@ -44,7 +44,13 @@ export class StudentsService {
   }
 
   loginStudents(student: Students): Observable<Students>{
-    return this.http.post<Students>(`${this.api}/student/login`, student).pipe(
+    
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${this.getToken()}`
+    });
+
+
+    return this.http.post<Students>(`${this.api}/student/login`, student, {headers}).pipe(
       map(resp => {
         this.setToken(resp['token'])
         return resp

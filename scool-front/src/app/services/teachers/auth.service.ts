@@ -26,4 +26,13 @@ export class AuthService {
       })
     )
   }
+
+  forgoutPassword(email: string): Observable<object>{
+    return this.http.post<object>(`${this.api}/teacher/forgoutPasswordTeachers`, email)
+  }
+
+  newPassword(password: string, token: string): Observable<object>{
+    return this.http.patch<object>(`${this.api}/teacher/recoverPasswordTeachers/${token}`, password)
+  }
+
 }

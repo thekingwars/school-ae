@@ -35,13 +35,13 @@ export class LoginComponent implements OnInit {
     let message;
 
     if (error.errors.required) {
-      message = 'El campo es requerido';
+      message = 'O campo é obrigatório';
     }
     if (error.hasError('minlength')) {
-      message = 'Debe colocar un minimo de 6 caracteres';
+      message = 'Deve introduzir um mínimo de 6 caracteres';
     }
     if (error.hasError('pattern')) {
-      message = 'El email es invalido';
+      message = 'O e-mail é inválido';
     }
 
     return message;
@@ -58,6 +58,8 @@ export class LoginComponent implements OnInit {
       console.log(res)
       this.router.navigateByUrl(`/students/profile/user/${res['student']['aluno_id']}`)
     }, err => {
+
+      console.log(err)
 
       if(err.status === 500){
         Swal.fire('Error', 'Utilizador não validado por mais de 3 meses, por favor contacte o suporte.', 'error')

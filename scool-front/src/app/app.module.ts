@@ -9,6 +9,7 @@ import { Redirect404Component } from './views/pages/redirect404/redirect404.comp
 
 //modules
 import { AppRoutingModule } from './app-routing.module';
+import { ComponentsModule } from './components/components.module';
 
 //modules npm
 import { NgxSpinnerModule } from 'ngx-spinner';
@@ -27,6 +28,7 @@ import { HomeComponent } from './views/pages/home/home.component';
     HttpClientModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    ComponentsModule,
     AppRoutingModule,
   ],
   providers: [

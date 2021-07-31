@@ -89,20 +89,31 @@
                     {{getErrorMessage('professores_password')}}
                 </p>
 
+                <div class="wrap-input100 validate-input m-b-10">
+                    <input class="input100" type="password" formControlName="professores_password2" [class.noEsValido]="isValidField('professores_password2')" placeholder="Verificar sua Senha">
+                    <span class="focus-input100"></span>
+                    <span class="symbol-input100">
+                        <i class="fa fa-lock"></i>
+                    </span>
+                </div>
+
+                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px" *ngIf="isValidField('professores_password2')">
+                    {{getErrorMessage('professores_password2')}}
+                </p>
+                <p *ngIf="checarSiSonIguales()" style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px">
+                    Las contraseñas no coinciden
+                </p>
+
                 <div class="container-login100-form-btn p-t-10">
                     <button class="login100-form-btn" *ngIf="registerForm.valid">
-                        Registrarse
+                        Registe-se
                     </button>
                 </div>
 
                 <div class="text-center w-full p-t-25">
-                    <a routerLink="/students/forgoutPassword" class="txt1">
-                        Forgot Password?
-                    </a>
-
                     <div>
                         <a class="txt1 pointer" routerLink="/teachers/login">
-                            ¿Ya tienes una cuenta?
+                            ¿Já tens uma conta?
                             <i class="fa fa-long-arrow-right"></i>						
                         </a>
                     </div>

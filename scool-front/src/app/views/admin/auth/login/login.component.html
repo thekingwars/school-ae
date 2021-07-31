@@ -1,0 +1,47 @@
+<div class="body">
+    <div class="limiter">
+        <div class="container-login100" style="background-image: url('../../../../assets/images/img-01.jpg');">
+            <div class="wrap-login100 p-b-30">
+                <form [formGroup]="adminForm" (ngSubmit)="onSubmit()" class="login100-form validate-form">
+                    <div class="login100-form-avatar">
+                        <img src="../../../../assets/images/avatar-01.jpg" alt="AVATAR">
+                    </div>
+
+                    <span class="login100-form-title p-t-20 p-b-45">
+                        Login para os administradores
+                    </span>
+
+                    <div class="wrap-input100 validate-input m-b-10">
+                        <input class="input100" type="text" formControlName="admin_email" placeholder="Email" [class.noEsValido]="isValidField('admin_email')">
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                                <i class="fa fa-user"></i>
+                        </span>
+                    </div>
+
+                    <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px; margin-bottom: 4px;" *ngIf="isValidField('admin_email')">
+                        {{getErrorMessage('admin_email')}}
+                    </p>
+
+                    <div class=" wrap-input100 validate-input m-b-10">
+                        <input class="input100" type="password" formControlName="admin_password" placeholder="Password" [class.noEsValido]="isValidField('admin_password')">
+                        <span class="focus-input100 ">Error</span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock"></i>
+                        </span>
+                    </div>
+
+                    <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('admin_password')">
+                        {{getErrorMessage('admin_password')}}
+                    </p>
+
+                    <div class="container-login100-form-btn p-t-10">
+                        <button type="submit" class="login100-form-btn" *ngIf="adminForm.valid">
+                                Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de um livro</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="livroForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro isbn</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_isbn')" [class.is-valid]="ValidInput('livro_isbn')" [dropSpecialCharacters]="false" mask="000-0-00-000000-0" placeholder="000-0-00-000000-0" formControlName="livro_isbn">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro nome</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_nome')" [class.is-valid]="ValidInput('livro_nome')" formControlName="livro_nome">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro editora</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_editora')" [class.is-valid]="ValidInput('livro_editora')" formControlName="livro_editora">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro ano edicao</label>
+                        <input type="date" class="form-control" [class.is-invalid]="isValidField('livro_ano_edicao')" [class.is-valid]="ValidInput('livro_ano_edicao')" formControlName="livro_ano_edicao">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro programa</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_programa')" [class.is-valid]="ValidInput('livro_programa')" formControlName="livro_programa">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro gr etario</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_gr_etario')" [class.is-valid]="ValidInput('livro_gr_etario')" formControlName="livro_gr_etario">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro lingua</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('livro_lingua')" [class.is-valid]="ValidInput('livro_lingua')" formControlName="livro_lingua">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro nivel</label>
+                        <input type="number" class="form-control" [class.is-invalid]="isValidField('livro_nivel')" [class.is-valid]="ValidInput('livro_nivel')" formControlName="livro_nivel">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Estado livro nome</label>
+                        <input type="number" class="form-control" [class.is-invalid]="isValidField('estado_livro_fk')" [class.is-valid]="ValidInput('estado_livro_fk')" formControlName="estado_livro_fk">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label>Livro valor venda</label>
+                        <input type="number" class="form-control" [class.is-invalid]="isValidField('livro_valor_venda')" [class.is-valid]="ValidInput('livro_valor_venda')" formControlName="livro_valor_venda">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" [disabled]="livroForm.invalid">
+                Crear
+            </button>
+        </form>
+    </div>

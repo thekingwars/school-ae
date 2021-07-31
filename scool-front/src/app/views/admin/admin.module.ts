@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FlatpickrModule } from 'angularx-flatpickr';
 
 
 
@@ -11,7 +10,6 @@ import { IndexEscolasComponent } from './profile/escolas/index-escolas/index-esc
 import { CreateEscolasComponent } from './profile/escolas/create-escolas/create-escolas.component';
 import { UpdateEscolasComponent } from './profile/escolas/update-escolas/update-escolas.component';
 import { ViewEscolaComponent } from './profile/escolas/view-escola/view-escola.component';
-import { DataTablesModule } from 'angular-datatables';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InstalacoesComponent } from './profile/instalacoes/instalacoes.component';
 import { ViewInstalacoesComponent } from './profile/instalacoes/view-instalacoes/view-instalacoes.component';
@@ -30,11 +28,22 @@ import { CreateEquipamentoComponent } from './profile/equipamento/create-equipam
 import { UpdateEquipamentoComponent } from './profile/equipamento/update-equipamento/update-equipamento.component';
 import { ViewEquipamentoComponent } from './profile/equipamento/view-equipamento/view-equipamento.component';
 import { FullCalendarModule } from '@fullcalendar/angular';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
 
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
 import timeGridPlugin from '@fullcalendar/timegrid'
-import listGridPlugin from '@fullcalendar/list'
+import listGridPlugin from '@fullcalendar/list';
+import { LoginComponent } from './auth/login/login.component';
+import { LivrosComponent } from './profile/livros/livros.component';
+import { CreateLivrosComponent } from './profile/livros/create-livros/create-livros.component';
+import { UpdateLivrosComponent } from './profile/livros/update-livros/update-livros.component';
+import { ViewLivrosComponent } from './profile/livros/view-livros/view-livros.component';
+import { AgGridModule } from 'ag-grid-angular';
+import { NgxSelectModule } from 'ngx-select-ex';
+
+
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -42,6 +51,13 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   timeGridPlugin,
   listGridPlugin
 ]);
+
+const maskConfigFunction: () => Partial<IConfig> = () => {
+  return {
+    validation: false,
+  };
+};
+
 
 @NgModule({
   declarations: [
@@ -65,16 +81,22 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     EquipamentoIndexComponent,
     CreateEquipamentoComponent,
     UpdateEquipamentoComponent,
-    ViewEquipamentoComponent
+    ViewEquipamentoComponent,
+    LoginComponent,
+    LivrosComponent,
+    CreateLivrosComponent,
+    UpdateLivrosComponent,
+    ViewLivrosComponent
   ],
   imports: [
     CommonModule,
     ComponentsModule,
-    DataTablesModule,
     AdminRoutingModule,
     FormsModule,
-    FlatpickrModule.forRoot(),
     ReactiveFormsModule,
+    AgGridModule.withComponents([]),
+    NgxMaskModule.forRoot(maskConfigFunction),
+    NgxSelectModule,
     FullCalendarModule
   ],
   exports: [
