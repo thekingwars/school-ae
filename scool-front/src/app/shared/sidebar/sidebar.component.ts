@@ -218,7 +218,7 @@ export class SidebarComponent implements OnInit {
               title: 'Estado livros',
               icon: 'nav-icon fas fa-bookmark',
               routerLink:(id) => {
-                return `/admin/profile/estadoLivros`
+                return `/admin/profile/estado-livros`
               }
             }         
           ]

@@ -21,7 +21,7 @@ export class CreateAulasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formAulas()
-    this.getEscolas()
+    this.getSalas()
   }
 
   formAulas(){
@@ -38,9 +38,10 @@ export class CreateAulasComponent implements OnInit {
     })
   }
 
-  getEscolas(){
+  getSalas(){
     this.escolaService.allSalas().subscribe(res => {
-      this.salas = res['salas']
+      console.log(res)
+      this.salas = res
     }, err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })

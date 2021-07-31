@@ -12,12 +12,14 @@ import Swal from 'sweetalert2';
 export class CreateLivrosComponent implements OnInit {
 
   livroForm: FormGroup
+  estadoLivro: any;
 
   constructor(private fb: FormBuilder, private livroServices: LivrosService, private router: Router) {
     this.formFb()
   }
 
   ngOnInit(): void {
+    this.getAllEstadoLivros()
   }
 
   formFb(){
@@ -32,6 +34,12 @@ export class CreateLivrosComponent implements OnInit {
       livro_nivel: new FormControl('', [Validators.required]),
       estado_livro_fk: new FormControl('', [Validators.required]),
       livro_valor_venda: new FormControl('', [Validators.required])
+    })
+  }
+
+  getAllEstadoLivros(){
+    this.livroServices.allEstadoLivros().subscribe(res => {
+      this.estadoLivro = res
     })
   }
 

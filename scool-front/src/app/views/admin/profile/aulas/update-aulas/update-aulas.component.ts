@@ -42,7 +42,7 @@ export class UpdateAulasComponent implements OnInit {
 
   getEscolas(){
     this.escolaService.allSalas().subscribe(res => {
-      this.salas = res['salas']
+      this.salas = res
     }, err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })

@@ -57,7 +57,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label>Estado livro nome</label>
-                        <input type="number" class="form-control" [class.is-invalid]="isValidField('estado_livro_fk')" [class.is-valid]="ValidInput('estado_livro_fk')" formControlName="estado_livro_fk">
+                        <select class="form-control" [class.is-invalid]="isValidField('estado_livro_fk')" [class.is-valid]="ValidInput('estado_livro_fk')" formControlName="estado_livro_fk">
+                            <option value="">
+                                Seleccionar
+                            </option>
+                            <option [value]="estadolivro['estado_livro_id']" *ngFor="let estadolivro of estadoLivro">
+                                {{estadolivro['estado_livro_nome']}}
+                            </option>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">

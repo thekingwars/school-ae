@@ -24,6 +24,10 @@ import { UpdateSalasComponent } from './profile/salas/update-salas/update-salas.
 import { ViewsSalasComponent } from './profile/salas/views-salas/views-salas.component';
 import { UpdateLivrosComponent } from './profile/livros/update-livros/update-livros.component';
 import { ViewLivrosComponent } from './profile/livros/view-livros/view-livros.component';
+import { CreateEstadoComponent } from './profile/estado-livros/create-estado/create-estado.component';
+import { EstadoLivrosComponent } from './profile/estado-livros/estado-livros.component';
+import { UpdateEstadoComponent } from './profile/estado-livros/update-estado/update-estado.component';
+import { ViewEstadoComponent } from './profile/estado-livros/view-estado/view-estado.component';
 
 const routes: Routes = [
   {
@@ -117,6 +121,22 @@ const routes: Routes = [
           {
             path: 'update/livros/:id',
             component: UpdateLivrosComponent
+          },
+          {
+            path: 'estado-livros',
+            component: EstadoLivrosComponent
+          },
+          {
+            path: 'create/estado-livros',
+            component: CreateEstadoComponent
+          },
+          {
+            path: 'update/estado-livros/:id',
+            component: UpdateEstadoComponent
+          },
+          {
+            path: 'get/estado-livros/:id',
+            component: ViewEstadoComponent
           }
         ]
       }

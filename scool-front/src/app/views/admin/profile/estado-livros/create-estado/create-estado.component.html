@@ -1,0 +1,22 @@
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de um livro</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <form [formGroup]="estadolivroForm" (ngSubmit)="onSubmit()">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Estado livro nome</label>
+                        <input type="text" class="form-control" [class.is-invalid]="isValidField('estado_livro_nome')" [class.is-valid]="ValidInput('estado_livro_nome')" formControlName="estado_livro_nome">
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn btn-primary" [disabled]="estadolivroForm.invalid">
+                Crear
+            </button>
+        </form>
+    </div>
+</div>

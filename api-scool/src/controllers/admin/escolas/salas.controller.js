@@ -11,18 +11,9 @@ export const uploaderSala = multer({
 
 export const createSalas = async(req, res) => {
     const { sala_nome, sala_capacidade_aconselhada, sala_capacidade_maxima, sala_equipamento_quantidade, escolas_fk } = req.body
-
+    const file = req.file
     let sql = `INSERT INTO salas SET ?`
     let salaUnique = `SELECT * from salas WHERE sala_nome = ?`
-    const file = req.file
-    const data = {
-        sala_nome,
-        sala_capacidade_aconselhada,
-        sala_capacidade_maxima,
-        sala_equipamento_quantidade,
-        sala_foto: `http://dev.servebbs.net:3200/${file.filename}`,
-        escolas_fk
-    }
 
     const salaTable = await addSql(salaUnique, sala_nome)
 
@@ -34,6 +25,14 @@ export const createSalas = async(req, res) => {
 
     if (!sala_nome || !sala_capacidade_aconselhada || !sala_capacidade_maxima || !sala_equipamento_quantidade || !file || !escolas_fk) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
+    }
+    const data = {
+        sala_nome,
+        sala_capacidade_aconselhada,
+        sala_capacidade_maxima,
+        sala_equipamento_quantidade,
+        sala_foto: `http://dev.servebbs.net:3200/${file.filename}`,
+        escolas_fk
     }
 
     salas = await addSql(sql, data)

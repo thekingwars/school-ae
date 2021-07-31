@@ -43,7 +43,7 @@ export const findAllLivros = async(req, res) => {
 
     let sqlextra = `SELECT * FROM livros`
 
-    livros = await addSql(sqlextra);
+    livros = await addSql(sql);
 
     return res.status(200).json({ ok: true, livros });
 }

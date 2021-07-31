@@ -1,5 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import format from 'date-fns/format';
 import { Observable, ObservableLike } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Aulas } from 'src/app/models/aulas.models';
@@ -32,13 +33,17 @@ export class EscolasService {
     )
   }
 
-  allEscolas(): Observable<Escolas>{
+  allEscolas(): Observable<any>{
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
 
-    return this.http.get<Escolas>(`${this.api}/admin/all/escolas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/escolas`, {headers}).pipe(
+      map(res => {
+        return res['escolas']
+      })
+    )
   }
 
   getEscolas(id: number): Observable<Escolas>{
@@ -82,13 +87,17 @@ export class EscolasService {
     return this.http.post<object>(`${this.api}/admin/create/instalacoes`, instalacoes, {headers})
   }
 
-  allInstalacoes():Observable<object>{
+  allInstalacoes():Observable<any>{
 
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
 
-    return this.http.get<object>(`${this.api}/admin/all/instalacoes`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/instalacoes`, {headers}).pipe(
+      map(res => {
+        return res['instalacoes']
+      })
+    )
   }
 
   getInstalacoes(id: number):Observable<object>{
@@ -124,11 +133,15 @@ export class EscolasService {
     return this.http.post<object>(`${this.api}/admin/create/salas`, salas, {headers})
   }
 
-  allSalas():Observable<object>{
+  allSalas():Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.get<object>(`${this.api}/admin/all/salas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/salas`, {headers}).pipe(
+      map(res => {
+        return res['salas']
+      })
+    )
   }
 
   getSalas(id: number):Observable<object>{
@@ -162,11 +175,15 @@ export class EscolasService {
   }
 
   
-  allAulas():Observable<Aulas[]>{
+  allAulas():Observable<any>{
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${this.studentServices.getToken()}`
     });
-    return this.http.get<Aulas[]>(`${this.api}/admin/all/aulas`, {headers})
+    return this.http.get<any>(`${this.api}/admin/all/aulas`, {headers}).pipe( 
+      map( res => {
+        return res['aulas']
+      } )
+     )
   }
 
   getAulas(id: number):Observable<Aulas>{

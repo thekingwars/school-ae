@@ -41,6 +41,10 @@ import { UpdateLivrosComponent } from './profile/livros/update-livros/update-liv
 import { ViewLivrosComponent } from './profile/livros/view-livros/view-livros.component';
 import { AgGridModule } from 'ag-grid-angular';
 import { NgxSelectModule } from 'ngx-select-ex';
+import { EstadoLivrosComponent } from './profile/estado-livros/estado-livros.component';
+import { CreateEstadoComponent } from './profile/estado-livros/create-estado/create-estado.component';
+import { UpdateEstadoComponent } from './profile/estado-livros/update-estado/update-estado.component';
+import { ViewEstadoComponent } from './profile/estado-livros/view-estado/view-estado.component';
 
 
 
@@ -86,7 +90,11 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     LivrosComponent,
     CreateLivrosComponent,
     UpdateLivrosComponent,
-    ViewLivrosComponent
+    ViewLivrosComponent,
+    EstadoLivrosComponent,
+    CreateEstadoComponent,
+    UpdateEstadoComponent,
+    ViewEstadoComponent
   ],
   imports: [
     CommonModule,

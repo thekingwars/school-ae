@@ -1,1 +1,69 @@
-<p>view-livros works!</p>
+<div class="card card-primary my-4">
+    <div class="card-header">
+        <h3 class="card-title">Criação de um livro</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro isbn</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_isbn" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro nome</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_nome" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro editora</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_editora" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro ano edicao</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_ano_edicao" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro programa</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_programa" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro gr etario</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_gr_etario" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro lingua</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros.livro_lingua" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro nivel</label>
+                    <input type="number" class="form-control" [placeholder]="livro.livros.livro_nivel" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Estado livro nome</label>
+                    <input type="text" class="form-control" [placeholder]="livro.livros['estado_livro_nome']" disabled>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>Livro valor venda</label>
+                    <input type="number" class="form-control" [placeholder]="livro.livros.livro_valor_venda" disabled>
+                </div>
+            </div>
+        </div>
+    </div>

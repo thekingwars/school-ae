@@ -16,6 +16,7 @@ export class LivrosComponent implements OnInit {
   defaultColDef
   rowData:any = this.livroServices.allLivros()
   livros = []
+  estadoLivro
   public selectControl = new FormControl();
   public selectControl2 = new FormControl()
   public selectControl3 = new FormControl()

@@ -1,29 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
-import { EscolasService } from 'src/app/services/admin/escolas.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { LivrosService } from 'src/app/services/admin/livros.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-instalacoes',
-  templateUrl: './instalacoes.component.html',
-  styleUrls: ['./instalacoes.component.scss']
+  selector: 'app-estado-livros',
+  templateUrl: './estado-livros.component.html',
+  styleUrls: ['./estado-livros.component.scss']
 })
-export class InstalacoesComponent implements OnInit {
+export class EstadoLivrosComponent implements OnInit {
+
   paginationPageSize: number
   cacheBlockSize: number
   defaultColDef
-  rowData = this.escolaService.allInstalacoes()
-  instalacoes = []
-  estadoLivro
-  public selectControl = new FormControl()
+  rowData:any = this.livroServices.allEstadoLivros()
+  livros = []
+  public selectControl = new FormControl();
   public selectControl2 = new FormControl()
   public selectControl3 = new FormControl()
 
   columnDefs = [
-    { headerName: 'ID', field: 'instalacoes_id', sortable: true, filter: true},
-    { headerName: 'Instalacoes nome', field: 'instalacoes_nome', sortable: true, filter: true, },
+    { headerName: 'ID', field: 'estado_livro_id', sortable: true, filter: true},
+    { headerName: 'Estado livro nome', field: 'estado_livro_nome', sortable: true, filter: true, },
   ];
-  constructor(private escolaService: EscolasService) {
+
+  constructor(private livroServices: LivrosService) {
     this.defaultColDef = {
       flex: 1,
       minWidth: 150,
@@ -32,40 +33,36 @@ export class InstalacoesComponent implements OnInit {
     }
     this.paginationPageSize = 15
     this.cacheBlockSize = 15
-    this.viewInstalacoes()
-    this.updateInstalacoes()
-    this.deleteInstalacoes()
+    this.updateEstadoLivro()
+    this.viewEstadoLivro()
+    this.deleteEstadoLivro()
   }
 
   ngOnInit(): void {
-    this.getInstalacoes()
-  }
-
-  getInstalacoes(){
-    this.escolaService.allInstalacoes().subscribe(res => {
+    this.livroServices.allEstadoLivros().subscribe(res => {
       res.map( res => {
-        this.instalacoes.push(`${res['instalacoes_nome']} - ${res['instalacoes_id']}`)
+        this.livros.push(`${res['estado_livro_nome']} - ${res['estado_livro_id']}`)
       } )
     })
   }
 
-  updateInstalacoes(){
+  updateEstadoLivro(){
     this.selectControl.valueChanges.subscribe(res => {
       let id
       id = res.split('-')
-      window.open(`/admin/profile/update/instalacoes/${Number(id[1])}`)
+      window.open(`/admin/profile/update/estado-livros/${Number(id[1])}`)
     })
   }
 
-  viewInstalacoes(){
+  viewEstadoLivro(){
     this.selectControl2.valueChanges.subscribe(res => {
       let id
       id = res.split('-')
-      window.open(`/admin/profile/get/instalacoes/${Number(id[1])}`)
+      window.open(`/admin/profile/get/estado-livros/${Number(id[1])}`)
     })
   }
 
-  deleteInstalacoes(){
+  deleteEstadoLivro(){
     this.selectControl3.valueChanges.subscribe(res => {
       let id
       id = res.split('-')
@@ -83,8 +80,8 @@ export class InstalacoesComponent implements OnInit {
         }).then((result) => {
           if (result.isConfirmed) {
             console.log(id)
-          this.escolaService.deleteInstalacoes(Number(id[1])).subscribe(res => {
-            Swal.fire({title: 'Error', text: res['instalacoes'], icon: 'success', allowOutsideClick: false}).then(result => {
+          this.livroServices.deleteEstadoLivro(Number(id[1])).subscribe(res => {
+            Swal.fire({title: 'Error', text: res['livros'], icon: 'error', allowOutsideClick: false}).then(result => {
               if(result.isConfirmed){
                 window.location.reload()
               }
@@ -95,5 +92,4 @@ export class InstalacoesComponent implements OnInit {
       }
     })
   }
-
 }
