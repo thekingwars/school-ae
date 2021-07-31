@@ -4,6 +4,7 @@ import { passwordEncrypt, comparePassword } from '../../utils/bcrypt'
 import { transporter } from '../../config/nodemailer'
 import { clientPlivo } from '../../utils/plivo'
 import { v4 as uuidv4 } from 'uuid'
+import { keys } from '../../config/configs'
 
 export const register = async(req, res) => {
     const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_formacao, aluno_email, aluno_password, aluno_idad } = req.body
@@ -46,8 +47,8 @@ export const register = async(req, res) => {
 
     const student = await db.query(sql, data)
 
-    let token = jwt.sign({ id: student.insertId }, 'mySecretKey', {
-        expiresIn: '2190h'
+    let token = jwt.sign({ id: student.insertId }, keys.JWT_SECRET_KEY, {
+        expiresIn: keys.JWT_EXPIRE_IN
     })
 
     await transporter.sendMail({
@@ -72,8 +73,8 @@ export const login = async(req, res) => {
         return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
         if (comparePassword(aluno_password, student_email[0].aluno_password)) {
-            let token = jwt.sign({ id: student_email[0].aluno_id, user: student_email[0] }, 'mySecretKey', {
-                expiresIn: 43200
+            let token = jwt.sign({ id: student_email[0].aluno_id, user: student_email[0] }, keys.JWT_SECRET_KEY, {
+                expiresIn: keys.JWT_EXPIRE_IN
             })
             return res.status(201).json({ ok: true, token, student: student_email[0] })
         } else {
@@ -144,7 +145,7 @@ export const forgoutPassword = async(req, res) => {
     if (email.length === 0) {
         return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
-        let token = jwt.sign({ user: email[0].aluno_id }, 'mySecretKey', {
+        let token = jwt.sign({ user: email[0].aluno_id }, keys.JWT_SECRET_KEY, {
             expiresIn: '5min'
         })
 

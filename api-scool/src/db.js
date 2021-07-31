@@ -1,15 +1,13 @@
 import mysql from 'mysql2';
 import { promisify } from 'util';
-require('dotenv').config({
-    path: `.env.development`
-})
+import { keys } from './config/configs'
 
 const myConnection = mysql.createConnection({
-    host: 'localhost',
-    port: process.env.DB_PORT,
-    user: 'root',
-    //password: process.env.DB_PASSWORD,
-    database: process.env.DB_DATABASE
+    host: keys.DB_HOST,
+    port: keys.DB_PORT,
+    user: keys.DB_USER,
+    password: keys.DB_PASSWORD,
+    database: keys.DB_DATABASE
 });
 
 myConnection.connect(function(err) {

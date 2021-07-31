@@ -6,11 +6,11 @@ import indexRoutes from './routes/index.routes'
 
 //variables
 const app = express();
-const NODE_ENV = process.env.NODE_ENV || 'development'
+/*const NODE_ENV = process.env.NODE_ENV || 'development'
 require('dotenv').config({
 
     path: `.env.${NODE_ENV}`
-})
+})*/
 
 
 //options
