@@ -43,8 +43,6 @@ export const registerTeachers = async(req, res) => {
 
     const teachers = await db.query(sql, data)
 
-    let token = jwt.sign({ id: teachers.insertId }, 'mySecretKey', {
-        expiresIn: 43200
     })
 
     await transporter.sendMail({
@@ -67,8 +65,8 @@ export const loginTeachers = async(req, res) => {
         return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
         if (comparePassword(professores_password, professor_email[0].professores_password)) {
-            let token = jwt.sign({ id: professor_email[0].professor_id, user: professor_email[0] }, 'mySecretKey', {
-                expiresIn: 43200
+            let token = jwt.sign({ id: professor_email[0].professor_id, user: professor_email[0] }, keys.JWT_SECRET_KEY, {
+                expiresIn: keys.JWT_EXPIRE_IN
             })
             return res.status(201).json({ ok: true, token, professor: professor_email[0] })
         } else {
@@ -91,7 +89,7 @@ export const forgoutPasswordTeachers = async(req, res) => {
     if (email.length === 0) {
         return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
     } else {
-        let token = jwt.sign({ user: email[0].professor_id }, 'mySecretKey', {
+        let token = jwt.sign({ user: email[0].professor_id }, keys.JWT_SECRET_KEY, {
             expiresIn: '5min'
         })
 
