@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AgAngleSelect } from 'ag-grid-community';
 import { StudentsService } from 'src/app/services/students/students.service';
 import sweet from 'sweetalert2'
 
@@ -10,19 +11,34 @@ import sweet from 'sweetalert2'
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  age;
+  showAge;
   registerForm: FormGroup;
   private reggexEmail: RegExp = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{1,5}|[0-9]{1,3})(\]?)$/
   private reggexLetras: RegExp = /^([a-zA-Z ]+)(\s[a-zA-Z ]+)*$/
   number: number[];
+ 
 
   constructor(private fb: FormBuilder, private studentServices: StudentsService, private router: Router) { 
     this.FormRegister()
     this.number = Array(90).fill(0).map((e, i) => i)
+
   }
 
   ngOnInit(): void {
+ 
   }
+
+  onFocusOutEvent(event: any){
+    if(this.age){
+      const convertAge = new Date(this.age);
+      const timeDiff = Math.abs(Date.now() - convertAge.getTime());
+      this.showAge = Math.floor((timeDiff / (1000 * 3600 * 24))/365);
+     
+    }
+    console.log(event.target.value);
+ 
+ }
   
   FormRegister(): void{
     this.registerForm = this.fb.group({
@@ -33,7 +49,8 @@ export class RegisterComponent implements OnInit {
       aluno_email: new FormControl('', [Validators.required, Validators.pattern(this.reggexEmail)]),
       aluno_password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       aluno_password2: new FormControl('', [Validators.required, Validators.minLength(6)]),
-      aluno_idad: new FormControl('', [Validators.required])
+      aluno_idad: new FormControl('', [Validators.required]),
+      aluno_data_nascimento: new FormControl('', [Validators.required])
     }, {
       validators: this.validarQueSeanIguales
     })

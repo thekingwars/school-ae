@@ -3,6 +3,7 @@ import jwt from 'jsonwebtoken'
 import { passwordEncrypt, comparePassword } from '../../utils/bcrypt'
 import { transporter } from '../../config/nodemailer'
 import { v4 as uuidv4 } from 'uuid'
+import { keys } from '../../config/configs'
 
 export const registerTeachers = async(req, res) => {
     const { professor_nome, professor_telemovel, professor_habilitacao, professor_formacao, professores_email, professores_password } = req.body
@@ -43,6 +44,8 @@ export const registerTeachers = async(req, res) => {
 
     const teachers = await db.query(sql, data)
 
+    let token = jwt.sign({ id: teachers.insertId }, keys.JWT_SECRET_KEY, {
+        expiresIn: keys.JWT_EXPIRE_IN
     })
 
     await transporter.sendMail({

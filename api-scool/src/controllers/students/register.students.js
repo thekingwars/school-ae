@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { keys } from '../../config/configs'
 
 export const register = async(req, res) => {
-    const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_formacao, aluno_email, aluno_password, aluno_idad } = req.body
+    const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_formacao, aluno_email, aluno_password, aluno_idad, aluno_data_nascimento } = req.body
     let verifyEmail = 'SELECT * FROM alunos WHERE aluno_email = ?'
     let sql = 'INSERT INTO alunos SET ?'
     let numeroAleatorio = Math.floor((Math.random() * (99999 - 0 + 1)) + 99999)
@@ -21,6 +21,7 @@ export const register = async(req, res) => {
         aluno_email,
         aluno_password: passwordEncrypt(aluno_password),
         aluno_idad,
+        aluno_data_nascimento,
         fk_UserID,
         aluno_role: 'aluno'
     }
@@ -47,13 +48,18 @@ export const register = async(req, res) => {
 
     const student = await db.query(sql, data)
 
+    let token = jwt.sign({ id: student.insertId }, keys.JWT_SECRET_KEY, {
+        expiresIn: keys.JWT_EXPIRE_IN
     })
 
     await transporter.sendMail({
         from: '"School App👻" <carlosguerra2001.2@gmail.com>', // sender address
         to: aluno_email, // list of receivers
         subject: "Hello ✔", // Subject line
-        html: `Verificar o número de correio ${numeroAleatorio}`
+        html: `<html><strong>Teu Codigo de Validação é ${numeroAleatorio}</strong></html>`
+
+
+
     });
 
     clientPlivo('SCHOOL', `${aluno_telemovel}`, `O seu código de verificação sms é: ${numeroAleatorio2}`)

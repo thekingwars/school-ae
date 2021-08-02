@@ -67,7 +67,7 @@ export class SidebarComponent implements OnInit {
               
             },
             {
-              title: 'Profile User Update',
+              title: 'Profile User Geral',
               icon: 'nav-icon far fa-user',
               routerLink:(id) => {
                 return `/students/profile/user/infoStudent/${id}`
@@ -104,7 +104,7 @@ export class SidebarComponent implements OnInit {
               }
             },
             {
-              title: 'Profile User Update',
+              title: 'Profile User Geral',
               icon: 'nav-icon far fa-user',
               routerLink:(id) => {
                 return `/students/profile/user/infoStudent/${id}`

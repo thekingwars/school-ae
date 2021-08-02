@@ -1,4 +1,5 @@
 import jwt from 'jsonwebtoken'
+import { keys } from '../config/configs'
 import db from '../db'
 
 
@@ -8,9 +9,7 @@ export const notToken = (req, res, next) => {
     } else {
         let token = req.headers.authorization.split(" ")[1]
 
-        console.log(token)
-
-        jwt.verify(token, 'mySecretKey', (err, decode) => {
+        jwt.verify(token, keys.JWT_SECRET_KEY, (err, decode) => {
             if (err) {
                 res.status(500).json({ err: 'Token invalido' })
             } else {

@@ -10,7 +10,7 @@
                     </div>
                     <div class="col-sm-6">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="#">Inicio</a></li>
                             <li class="breadcrumb-item active">User Profile</li>
                         </ol>
                     </div>
@@ -51,7 +51,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>E-Mail</strong>
 
                                 <p class="text-muted">
                                     {{student['student']['aluno_email']}}
@@ -59,13 +59,13 @@
 
                                 <hr>
 
-                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+                                <strong><i class="fas fa-location-arrow mr-1"></i>Morada</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_habilitacao']}}</p>
 
                                 <hr>
 
-                                <strong><i class="fas fa-passport mr-1"></i> Aluno info Doc y nacionalidade</strong>
+                                <strong><i class="fas fa-passport mr-1"></i> Aluno info Doc e nacionalidade</strong>
 
                                 <div>
                                     <p class="text-muted" *ngIf="student['student']['aluno_tipo_doc_ident'] && student['student']['aluno_num_doc_ident']">{{student['student']['aluno_tipo_doc_ident']}} - {{student['student']['aluno_num_doc_ident']}}</p>
@@ -80,7 +80,7 @@
 
                                 <hr>
 
-                                <strong><i class="fas fa-table mr-1"></i>fecha de nacimiento</strong>
+                                <strong><i class="fas fa-table mr-1"></i>data nascimento</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_data_nascimento'] | date: 'dd/LL/YYYY' }}</p>
 
@@ -100,7 +100,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>E-Mail</strong>
 
                                 <p class="text-muted">
                                     {{student['student']['aluno_pai_email']}}
@@ -108,7 +108,7 @@
 
                                 <hr>
 
-                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+                                <strong><i class="fas fa-location-arrow mr-1"></i>morada</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_pai_habilitacao']}}</p>
 
@@ -122,13 +122,13 @@
 
                                 <hr>
 
-                                <strong><i class="far fa-file-alt mr-1"></i> Formación</strong>
+                                <strong><i class="far fa-file-alt mr-1"></i> Formação</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_pai_formacao']}}</p>
 
                                 <hr>
 
-                                <strong><i class="fas fa-user-md mr-1"></i>Profesion</strong>
+                                <strong><i class="fas fa-user-md mr-1"></i>Profissão</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_pai_profissao']}}</p>
 
@@ -144,7 +144,7 @@
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
-                                <strong><i class="fas fa-envelope-open-text mr-1"></i>Correo</strong>
+                                <strong><i class="fas fa-envelope-open-text mr-1"></i>E-Mail</strong>
 
                                 <p class="text-muted">
                                     {{student['student']['aluno_pai_email']}}
@@ -152,7 +152,7 @@
 
                                 <hr>
 
-                                <strong><i class="fas fa-location-arrow mr-1"></i>Ubicación</strong>
+                                <strong><i class="fas fa-location-arrow mr-1"></i>Morada</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_mae_habilitacao']}}</p>
 
@@ -166,13 +166,13 @@
 
                                 <hr>
 
-                                <strong><i class="far fa-file-alt mr-1"></i> Formación</strong>
+                                <strong><i class="far fa-file-alt mr-1"></i> Formação</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_mae_formacao']}}</p>
 
                                 <hr>
 
-                                <strong><i class="fas fa-user-md mr-1"></i>Profesion</strong>
+                                <strong><i class="fas fa-user-md mr-1"></i>Profissão</strong>
 
                                 <p class="text-muted">{{student['student']['aluno_mae_profissao']}}</p>
 
