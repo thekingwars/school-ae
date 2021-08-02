@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiDev: 'http://localhost:3200/api'//'http://dev.servebbs.net:3200/api'
+  apiDev: 'http://dev.servebbs.net:3200/api'
 };
 
 /*
