@@ -57,6 +57,14 @@ export class LoginComponent implements OnInit {
       console.log(res)
       this.router.navigateByUrl(`/teachers/profile/user/${res['professor']['professor_id']}`)
     }, err => {
+      if(err.status === 406){
+        Swal.fire('Error', 'Deve validar o seu e-mail e número de telefone a fim de iniciar sessão.', 'error').then(result => {
+          if(result.isConfirmed){
+            this.router.navigateByUrl(`/teachers/verifyCodePhone`)
+          }
+        })
+        return
+      }
       Swal.fire('Error', err['error']['err'], 'error')
     })
   }

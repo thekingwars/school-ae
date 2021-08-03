@@ -8,7 +8,7 @@ const router = Router();
 
 //register and login
 router.post('/register', register)
-router.post('/login', login)
+router.post('/login', [verifyCode], login)
 router.post('/verifyEmail', verifyEmail)
 router.post('/verifyPhone', verifyPhone)
 router.post('/forgoutPassword', forgoutPassword)

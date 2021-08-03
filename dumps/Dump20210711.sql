@@ -97,6 +97,7 @@ LOCK TABLES `alunos` WRITE;
 /*!40000 ALTER TABLE `alunos` ENABLE KEYS */;
 UNLOCK TABLES;
 
+DROP TABLE IF EXISTS `admins`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `admins` (
@@ -425,20 +426,20 @@ CREATE TABLE `cursos` (
   `curso_id` int NOT NULL AUTO_INCREMENT,
   `curso_valor_matricula` varchar(45) DEFAULT NULL,
   `curso_valor` varchar(45) DEFAULT NULL,
-  `gr_etario_fk` int NOT NULL,
-  `lingua_fk` int NOT NULL,
-  `nivel_fk` int NOT NULL,
-  `area_fk` int NOT NULL,
-  `tipo_fk` int NOT NULL,
-  `modelo_fk` int NOT NULL,
-  `modalidade_fk` int NOT NULL,
+  `gr_etario` varchar(45) NOT NULL,
+  `lingua_fk` INT NOT NULL,
+  `nivel` int NOT NULL,
+  `area` varchar(5) NOT NULL,
+  `tipo` varchar(5) NOT NULL,
+  `modelo` varchar(5) NOT NULL,
+  `modalidade` varchar(5) NOT NULL,
   `programa_fk` int NOT NULL,
-  `horario_fk` int NOT NULL,
-  `sala_prevista_sala_id` int NOT NULL,
+  `horario` int DEFAULT NULL,
+  `sala_prevista_sala_id` int DEFAULT NULL,
   `instalacoes_fk` int NOT NULL,
-  `Tempo_aula_tempo_aula_id` int NOT NULL,
-  `Frequencia_frequencia_id` int NOT NULL,
-  `Duracao_duracao_id` int NOT NULL,
+  `tempo_aula` VARCHAR(45) NOT NULL,
+  `Frequencia` VARCHAR(45) NOT NULL,
+  `Duracao` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`curso_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -1655,7 +1656,7 @@ DROP TABLE IF EXISTS `programa`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `programa` (
   `programa_id` int NOT NULL AUTO_INCREMENT,
-  `programa _nome` varchar(5) DEFAULT NULL,
+  `programa_nome` varchar(5) DEFAULT NULL,
   `programa_horas` decimal(2,2) DEFAULT NULL,
   `programa_tempo_aula` decimal(2,2) DEFAULT NULL,
   PRIMARY KEY (`programa_id`)
@@ -1759,7 +1760,7 @@ CREATE TABLE `staff` (
   `staff_data_validade_ficha_medica` date DEFAULT NULL,
   `staff_data_validade_registo_criminal` date DEFAULT NULL,
   `staff_estado` varchar(45) DEFAULT NULL,
-  `codigo _postal_codigo _postal_id` int NOT NULL,
+/*`codigo _postal_codigo _postal_id` int NOT NULL,
   `tipo_doc_ident_tipo_doc_ident_id` int NOT NULL,
   `nacionalidades_nacionalidades_id` int NOT NULL,
   `freguesias_freguesias_id` int NOT NULL,
@@ -1768,7 +1769,7 @@ CREATE TABLE `staff` (
   `habilitacao_habiltacao_id` int NOT NULL,
   `sexo_sexo_id` int NOT NULL,
   `concelho_concelho_id` int NOT NULL,
-  `estado_dados_estado_dado_id` int NOT NULL,
+  `estado_dados_estado_dado_id` int NOT NULL, */
   `utilizador_fk` int NOT NULL,
   `Ponto_ponto_id` int NOT NULL,
   PRIMARY KEY (`staff_id`)
@@ -2116,7 +2117,7 @@ DROP TABLE IF EXISTS `valida`;
 CREATE TABLE `valida` (
   `ID` varchar(45) NOT NULL,
   `EmailCode` int NOT NULL,
-  `PhoneCode` int NOT NULL,
+  `PhoneCode` int DEFAULT NULL,
   `ValEMail` tinyint DEFAULT '0',
   `ValTelf` tinyint DEFAULT '0',
   `Fecha` varchar(45) DEFAULT NULL,

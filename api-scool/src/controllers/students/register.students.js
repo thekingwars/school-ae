@@ -1,10 +1,10 @@
 import db from '../../db'
 import jwt from 'jsonwebtoken'
 import { passwordEncrypt, comparePassword } from '../../utils/bcrypt'
-import { transporter } from '../../config/nodemailer'
 import { clientPlivo } from '../../utils/plivo'
 import { v4 as uuidv4 } from 'uuid'
 import { keys } from '../../config/configs'
+import { templateHtml } from '../../config/nodemailerHtml'
 
 export const register = async(req, res) => {
     const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_formacao, aluno_email, aluno_password, aluno_idad, aluno_data_nascimento } = req.body
@@ -25,6 +25,8 @@ export const register = async(req, res) => {
         fk_UserID,
         aluno_role: 'aluno'
     }
+
+
 
     if (!aluno_nome || !aluno_telemovel || !aluno_habilitacao || !aluno_formacao || !aluno_email || !aluno_password || !aluno_idad) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
@@ -52,15 +54,7 @@ export const register = async(req, res) => {
         expiresIn: keys.JWT_EXPIRE_IN
     })
 
-    await transporter.sendMail({
-        from: '"School App👻" <carlosguerra2001.2@gmail.com>', // sender address
-        to: aluno_email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        html: `<html><strong>Teu Codigo de Validação é ${numeroAleatorio}</strong></html>`
-
-
-
-    });
+    await templateHtml(numeroAleatorio, aluno_nome, aluno_email)
 
     clientPlivo('SCHOOL', `${aluno_telemovel}`, `O seu código de verificação sms é: ${numeroAleatorio2}`)
 
@@ -69,9 +63,9 @@ export const register = async(req, res) => {
 
 export const login = async(req, res) => {
     const { aluno_email, aluno_password } = req.body
-    let verifyEmail = 'SELECT * FROM alunos WHERE aluno_email = ?'
 
     const student_email = await db.query(verifyEmail, aluno_email)
+
 
     if (student_email.length === 0) {
         return res.status(400).json({ ok: 'false', err: 'correio inexistente, por favor registe-se' });
@@ -194,7 +188,7 @@ export const recoverPassword = async(req, res) => {
     }
 
 
-    jwt.verify(token, 'mySecretKey', async(err, decode) => {
+    jwt.verify(token, keys.JWT_SECRET_KEY, async(err, decode) => {
         if (err) {
             res.status(500).json({ err: 'Ficha inválida ou expirada, por favor peça uma nova alteração de senha.' })
         } else {

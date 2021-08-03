@@ -61,11 +61,6 @@ export class LoginComponent implements OnInit {
 
       console.log(err)
 
-      if(err.status === 500){
-        Swal.fire('Error', 'Utilizador não validado por mais de 3 meses, por favor contacte o suporte.', 'error')
-        return
-      }
-
       if(err.status === 406){
         Swal.fire('Error', 'Deve validar o seu e-mail e número de telefone a fim de iniciar sessão.', 'error').then(result => {
           if(result.isConfirmed){
