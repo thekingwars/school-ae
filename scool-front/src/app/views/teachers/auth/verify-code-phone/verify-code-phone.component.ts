@@ -5,11 +5,11 @@ import { CodesService } from 'src/app/services/students/codes.service';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-verify-code-email',
-  templateUrl: './verify-code-email.component.html',
-  styleUrls: ['./verify-code-email.component.scss']
+  selector: 'app-verify-code-phone',
+  templateUrl: './verify-code-phone.component.html',
+  styleUrls: ['./verify-code-phone.component.scss']
 })
-export class VerifyCodeEmailComponent implements OnInit {
+export class VerifyCodePhoneComponent implements OnInit {
 
   codeForm: FormGroup
   code: string
@@ -31,17 +31,17 @@ export class VerifyCodeEmailComponent implements OnInit {
 
   formCode(){
     this.codeForm = this.fb.group({
-      EmailCode: new FormControl('')
+      PhoneCode: new FormControl('')
     })
   }
 
   onSubmit(){
-    this.codeForm.setValue({EmailCode: this.code})
-    this.codeServices.codeEmail(this.codeForm.value).subscribe(res => {
-      console.log(res)
+    this.codeForm.setValue({PhoneCode: this.code})
+    
+    this.codeServices.codePhone(this.codeForm.value).subscribe(res => {
       Swal.fire('Correcto', res['mgs'], 'success')
 
-      this.router.navigateByUrl('/teachers/verifyCodePhone')
+      this.router.navigateByUrl('/teachers/login')
     },err => {
       Swal.fire('Error', err['error']['err'], 'error')
     })

@@ -1,28 +1,29 @@
 import db from '../../db'
 import jwt from 'jsonwebtoken'
 import { passwordEncrypt, comparePassword } from '../../utils/bcrypt'
-import { transporter } from '../../config/nodemailer'
+import { templateHtml } from '../../config/nodemailerHtml'
+import { clientPlivo } from '../../utils/plivo'
 import { v4 as uuidv4 } from 'uuid'
 import { keys } from '../../config/configs'
 
 export const registerTeachers = async(req, res) => {
-    const { professor_nome, professor_telemovel, professor_habilitacao, professor_formacao, professores_email, professores_password } = req.body
+    const { professor_nome, professor_telemovel, professor_habilitacao, professores_email, professores_password } = req.body
     let verifyEmail = 'SELECT * FROM professores WHERE professores_email = ?'
     let sql = 'INSERT INTO professores SET ?'
     let numeroAleatorio = Math.floor((Math.random() * (99999 - 0 + 1)) + 99999)
+    let numeroAleatorio2 = Math.floor((Math.random() * (99999 - 0 + 1)) + 99999)
     let fk_UserID = uuidv4()
     let data = {
         professor_nome,
         professor_telemovel,
         professor_habilitacao,
-        professor_formacao,
         professores_email,
         professores_password: passwordEncrypt(professores_password),
         fk_UserID,
         professores_role: 'professore'
     }
 
-    if (!professor_nome || !professor_telemovel || !professor_habilitacao || !professor_formacao || !professores_email || !professores_password) {
+    if (!professor_nome || !professor_telemovel || !professor_habilitacao || !professores_email || !professores_password) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
@@ -38,7 +39,7 @@ export const registerTeachers = async(req, res) => {
         }
     }
 
-    let validaTable = `INSERT INTO valida (ID, EmailCode) VALUES ('${fk_UserID}', '${numeroAleatorio}')`
+    let validaTable = `INSERT INTO valida (ID, EmailCode, PhoneCode) VALUES ('${fk_UserID}', '${numeroAleatorio}', '${numeroAleatorio2}')`
 
     await db.query(validaTable)
 
@@ -48,12 +49,8 @@ export const registerTeachers = async(req, res) => {
         expiresIn: keys.JWT_EXPIRE_IN
     })
 
-    await transporter.sendMail({
-        from: '"Fred Foo 👻" <carlosguerra2001.2@gmail.com>', // sender address
-        to: professores_email, // list of receivers
-        subject: "Hello ✔", // Subject line
-        html: `Verificar o número de correio ${numeroAleatorio}`
-    });
+    await templateHtml(numeroAleatorio, professor_nome, professores_email)
+    clientPlivo('SCHOOL', `${professor_telemovel}`, `O seu código de verificação sms é: ${numeroAleatorio2}`)
 
     return res.status(201).json({ ok: true, token, msg: 'Foi enviado um código de verificação para o seu e-mail e número de telefone.' })
 }

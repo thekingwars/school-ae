@@ -7,7 +7,7 @@ import { keys } from '../../config/configs'
 import { templateHtml } from '../../config/nodemailerHtml'
 
 export const register = async(req, res) => {
-    const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_formacao, aluno_email, aluno_password, aluno_idad, aluno_data_nascimento } = req.body
+    const { aluno_nome, aluno_telemovel, aluno_habilitacao, aluno_email, aluno_password, aluno_idad, aluno_data_nascimento } = req.body
     let verifyEmail = 'SELECT * FROM alunos WHERE aluno_email = ?'
     let sql = 'INSERT INTO alunos SET ?'
     let numeroAleatorio = Math.floor((Math.random() * (99999 - 0 + 1)) + 99999)
@@ -17,7 +17,6 @@ export const register = async(req, res) => {
         aluno_nome,
         aluno_telemovel,
         aluno_habilitacao,
-        aluno_formacao,
         aluno_email,
         aluno_password: passwordEncrypt(aluno_password),
         aluno_idad,
@@ -28,7 +27,7 @@ export const register = async(req, res) => {
 
 
 
-    if (!aluno_nome || !aluno_telemovel || !aluno_habilitacao || !aluno_formacao || !aluno_email || !aluno_password || !aluno_idad) {
+    if (!aluno_nome || !aluno_telemovel || !aluno_habilitacao || !aluno_email || !aluno_password || !aluno_idad) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' })
     }
 

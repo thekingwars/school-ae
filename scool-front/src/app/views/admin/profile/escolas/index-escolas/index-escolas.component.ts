@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
   styleUrls: ['./index-escolas.component.scss']
 })
 export class IndexEscolasComponent implements OnInit {
-  @ViewChild('agGrid') agGrid: AgGridAngular;
   dtOptions: any = {};
   calendarOptions: CalendarOptions
   title

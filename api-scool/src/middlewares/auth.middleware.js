@@ -25,7 +25,7 @@ export const verifyCode = async(req, res, next) => {
 
     const { aluno_email } = req.body
 
-    let sql = `SELECT a1.fk_UserID, b1.ID, b1.valEmail, b1.valTelf
+    let sql = `SELECT a1.fk_UserID, b1.ID, b1.valEmail, b1.valTelfb1.valTelf
                 FROM alunos a1 JOIN valida b1 ON a1.fk_UserID = b1.ID 
                 WHERE a1.aluno_email = ?`
 
@@ -48,7 +48,7 @@ export const verifyCodeEmail = async(req, res, next) => {
 
     const { professores_email } = req.body
 
-    let sql = ` SELECT a1.fk_UserID, b1.ID, b1.valEmail
+    let sql = ` SELECT a1.fk_UserID, b1.ID, b1.valEmail, b1.valTelf
                 FROM professores a1 JOIN valida b1 ON a1.fk_UserID = b1.ID 
                 WHERE a1.professores_email = ?`
 
@@ -57,7 +57,7 @@ export const verifyCodeEmail = async(req, res, next) => {
     if (fk.length === 0) {
         res.status(400).json({ err: "correio inexistente, por favor registe-seo" })
     } else {
-        if (fk[0].valEmail == false) {
+        if (fk[0].valEmail == false && fk[0].valTelf == false) {
             res.status(401).json({ err: "Acesso não autorizado, deve validar o seu e-mail e número de telefone." })
         } else {
             next();

@@ -11,7 +11,7 @@
                 </span>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
                             <input class="input100" type="text" formControlName="aluno_nome" placeholder="Nome" [class.noEsValido]="isValidField('aluno_nome')">
                             <span class="focus-input100"></span>
@@ -23,9 +23,22 @@
                             {{getErrorMessageLetras('aluno_nome')}}
                         </p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
-                            <input class="input100" type="tel" [dropSpecialCharacters]="false" prefix="+351" mask="000000000" formControlName="aluno_telemovel" placeholder="Telemóvel" [class.noEsValido]="isValidField('aluno_telemovel')">
+                            <select class="input100" formControlName="code_phone" [class.noEsValido]="isValidField('code_phone')">
+                                <option [value]="codePhone[i]" *ngFor="let code of codePhone; let i = index">
+                                    {{codePhone[i]}}
+                                </option>
+                            </select>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
+                            <input class="input100" type="number" formControlName="aluno_telemovel" placeholder="Telemóvel" [class.noEsValido]="isValidField('aluno_telemovel')">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fas fa-phone"></i>
@@ -35,11 +48,7 @@
                             {{getErrorMessage('aluno_telemovel')}}
                         </p>
                     </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
                             <input class="input100" type="text" formControlName="aluno_habilitacao" placeholder="Morada" [class.noEsValido]="isValidField('aluno_habilitacao')">
                             <span class="focus-input100"></span>
@@ -51,46 +60,17 @@
                             {{getErrorMessage('aluno_habilitacao')}}
                         </p>
                     </div>
-                    <div class="col-md-6">
-                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
-                            <input class="input100" type="text" formControlName="aluno_formacao" placeholder="Formação" [class.noEsValido]="isValidField('aluno_formacao')">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fas fa-user-tie"></i>
-                            </span>
-                        </div>
-                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_formacao')">
-                            {{getErrorMessageLetras('aluno_formacao')}}
-                        </p>
-                    </div>
                 </div>
 
                 <div class="wrap-input100 validate-input m-b-10">
-                    <input type="date" [(ngModel)]="age" class="input100Select" formControlName="aluno_data_nascimento" (focusout)="onFocusOutEvent($event)" />
-
-
-
+                    <input type="date" [(ngModel)]="age" class="input100Select" [class.noEsValido]="isValidField('aluno_data_nascimento')" formControlName="aluno_data_nascimento" (focusout)="onFocusOutEvent($event)" />
                     <span class="symbol-input100">
                         <i class="fas fa-calendar"></i>
                     </span>
                 </div>
 
-                <div class="wrap-input100 validate-input m-b-10">
-
-
-                    <select class="input100" [class.noEsValido]="isValidField('aluno_idad')" formControlName="aluno_idad" style="outline: none;">
-                   
-                        <option ngValue="{{showAge}}" ng-select="true" selected>{{showAge}}</option>
-                    </select>
-
-
-                    <span class="symbol-input100">
-                        <i class="fas fa-numer"></i>
-                    </span>
-                </div>
-
-                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_idad')">
-                    {{getErrorMessage('aluno_idad')}}
+                <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('aluno_data_nascimento')">
+                    {{getErrorMessage('aluno_data_nascimento')}}
                 </p>
 
                 <div class="wrap-input100 validate-input m-b-10 p-l-2">

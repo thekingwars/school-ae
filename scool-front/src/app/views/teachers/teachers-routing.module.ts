@@ -8,6 +8,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { NewPasswordComponent } from './auth/new-password/new-password.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { VerifyCodeEmailComponent } from './auth/verify-code-email/verify-code-email.component';
+import { VerifyCodePhoneComponent } from './auth/verify-code-phone/verify-code-phone.component';
 import { CandidaturaComponent } from './profile/candidatura/candidatura.component';
 
 const routes: Routes = [
@@ -21,7 +22,12 @@ const routes: Routes = [
         path: 'login', component: LoginComponent
       },
       {
-        path: 'VerifyCode', component: VerifyCodeEmailComponent
+        path: 'VerifyCode', 
+        component: VerifyCodeEmailComponent
+      },
+      {
+        path: 'verifyCodePhone',
+        component: VerifyCodePhoneComponent
       },
       {
         path: 'forgoutPassword',

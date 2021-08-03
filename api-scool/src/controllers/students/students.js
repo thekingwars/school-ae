@@ -24,10 +24,10 @@ export const user = (req, res) => {
 
 export const infoUserExtra = async(req, res) => {
     const { id } = req.params
-    const { aluno_sexo, aluno_nacionalidade, aluno_tipo_doc_ident, aluno_num_doc_ident, aluno_data_nascimento, aluno_nif } = req.body
+    const { aluno_sexo, aluno_nacionalidade, aluno_tipo_doc_ident, aluno_num_doc_ident, aluno_data_nascimento, aluno_nif, aluno_formacao } = req.body
     const file = req.file
 
-    if (!aluno_sexo || !aluno_nacionalidade || !aluno_tipo_doc_ident || !aluno_num_doc_ident || !aluno_data_nascimento || !aluno_nif) {
+    if (!aluno_sexo || !aluno_nacionalidade || !aluno_tipo_doc_ident || !aluno_num_doc_ident || !aluno_data_nascimento || !aluno_nif || !aluno_formacao) {
         return res.status(401).json({ ok: false, err: 'Campos obrigatórios' })
     }
 
@@ -37,6 +37,7 @@ export const infoUserExtra = async(req, res) => {
         aluno_tipo_doc_ident,
         aluno_num_doc_ident,
         aluno_data_nascimento,
+        aluno_formacao,
         aluno_nif,
         aluno_foto: !file ? null : `http://localhost:3200/${file.filename}`
     }

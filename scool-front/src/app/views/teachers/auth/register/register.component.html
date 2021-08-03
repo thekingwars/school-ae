@@ -11,7 +11,7 @@
                 </span>
 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
                             <input class="input100" type="text" formControlName="professor_nome" placeholder="FullName" [class.noEsValido]="isValidField('professor_nome')">
                             <span class="focus-input100"></span>
@@ -23,9 +23,22 @@
                             {{getErrorMessageLetras('professor_nome')}}
                         </p>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
-                            <input class="input100" type="tel" formControlName="professor_telemovel" placeholder="Telefono" [class.noEsValido]="isValidField('professor_telemovel')">
+                            <select class="input100" formControlName="code_phone" [class.noEsValido]="isValidField('code_phone')">
+                                <option [value]="codePhone[i]" *ngFor="let code of codePhone; let i = index">
+                                    {{codePhone[i]}}
+                                </option>
+                            </select>
+                            <span class="focus-input100"></span>
+                            <span class="symbol-input100">
+                                <i class="fas fa-phone"></i>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
+                            <input class="input100" type="number" formControlName="professor_telemovel" placeholder="Telefono" [class.noEsValido]="isValidField('professor_telemovel')">
                             <span class="focus-input100"></span>
                             <span class="symbol-input100">
                                 <i class="fas fa-phone"></i>
@@ -35,11 +48,7 @@
                             {{getErrorMessageNumber('professor_telemovel')}}
                         </p>
                     </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-12">
                         <div class="wrap-input100 validate-input m-b-10 p-r-2" data-validate="Username is required">
                             <input class="input100" type="text" formControlName="professor_habilitacao" placeholder="Dirección" [class.noEsValido]="isValidField('professor_habilitacao')">
                             <span class="focus-input100"></span>
@@ -49,18 +58,6 @@
                         </div>
                         <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('professor_habilitacao')">
                             {{getErrorMessage('professor_habilitacao')}}
-                        </p>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="wrap-input100 validate-input m-b-10 p-l-2" data-validate="Username is required">
-                            <input class="input100" type="text" formControlName="professor_formacao" placeholder="Formacion" [class.noEsValido]="isValidField('professor_formacao')">
-                            <span class="focus-input100"></span>
-                            <span class="symbol-input100">
-                                <i class="fas fa-user-tie"></i>
-                            </span>
-                        </div>
-                        <p style="margin-left: 15px; color: #c20009; font-weight: bold; margin-top: -10px;" *ngIf="isValidField('professor_formacao')">
-                            {{getErrorMessageLetras('professor_formacao')}}
                         </p>
                     </div>
                 </div>
