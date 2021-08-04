@@ -53,6 +53,9 @@
  *  (window as any).__Zone_enable_cross_context_check = true;
  *
  */
+ import "core-js/proposals/reflect-metadata";
+
+ import 'web-animations-js';  // Run `npm install --save web-animations-js`.
 
 /***************************************************************************************************
  * Zone JS is required by default for Angular itself.
