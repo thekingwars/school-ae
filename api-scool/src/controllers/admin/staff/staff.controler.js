@@ -1,5 +1,6 @@
 import db from '../../../db';
 import { storage } from '../../../config/multer'
+import { passwordEncrypt } from '../../../utils/bcrypt'
 import multer from 'multer';
 let staff;
 
@@ -7,40 +8,37 @@ export const uploaderFotoStaff = multer({
     storage
 }).single('staff_foto')
 
-export const createCurso = async(req, res) => {
+export const createStaff = async(req, res) => {
     const {
         staff_nome,
         staff_telemovel,
-        staff_lingua_nativa,
-        staff_foto,
-        staff_nacionalidade,
-        staff_tipo_doc_ident,
-        staff_num_doc_ident,
-        staff_sexo
+        staff_habilitacao,
+        staff_email,
+        staff_password,
+        staff_codigo_postal,
+        staff_freguesia,
+        staff_concelho,
+        staff_nacionalidade
     } = req.body;
 
     let sql = 'INSERT INTO staff SET ?';
+    let file = req.file
+
+    if (!staff_nome || !staff_telemovel || !staff_habilitacao || !staff_email || !staff_password || !staff_codigo_postal || !staff_freguesia || !staff_concelho || !staff_nacionalidade) {
+        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
+    }
 
     const data = {
         staff_nome,
         staff_telemovel,
-        staff_lingua_nativa,
-        staff_foto,
+        staff_habilitacao,
+        staff_email,
+        staff_password: passwordEncrypt(staff_password),
+        staff_codigo_postal,
+        staff_freguesia,
+        staff_concelho,
         staff_nacionalidade,
-        staff_tipo_doc_ident,
-        staff_num_doc_ident,
-        staff_sexo
-    }
-
-    if (!staff_nome ||
-        !staff_telemovel ||
-        !staff_lingua_nativa ||
-        !staff_nacionalidade ||
-        !staff_tipo_doc_ident ||
-        !staff_num_doc_ident ||
-        !staff_sexo
-    ) {
-        return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
+        staff_foto: file ? `http://localhost:3200/${file.filename}` : null
     }
 
     staff = await addSql(sql, data);

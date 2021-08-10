@@ -63,7 +63,9 @@ export const register = async(req, res) => {
 export const login = async(req, res) => {
     const { aluno_email, aluno_password } = req.body
 
-    const student_email = await db.query(verifyEmail, aluno_email)
+    const sql = `SELECT * FROM alunos WHERE aluno_email = ?`
+
+    const student_email = await db.query(sql, aluno_email)
 
 
     if (student_email.length === 0) {

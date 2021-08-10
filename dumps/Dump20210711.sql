@@ -1760,6 +1760,8 @@ CREATE TABLE `staff` (
   `staff_data_validade_ficha_medica` date DEFAULT NULL,
   `staff_data_validade_registo_criminal` date DEFAULT NULL,
   `staff_estado` varchar(45) DEFAULT NULL,
+  `staff_email` varchar(45) DEFAULT NULL,
+  `staff_password` varchar(45) DEFAULT NULL,
 /*`codigo _postal_codigo _postal_id` int NOT NULL,
   `tipo_doc_ident_tipo_doc_ident_id` int NOT NULL,
   `nacionalidades_nacionalidades_id` int NOT NULL,
