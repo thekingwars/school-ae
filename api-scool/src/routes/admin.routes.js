@@ -9,7 +9,9 @@ import { createInstalacoes, deleteInstalacoes, findAllInstalacoes, findInstalaco
 import { createSalas, deleteSalas, findAllSalas, findSalas, updateSalas, uploaderSala } from '../controllers/admin/escolas/salas.controller';
 import { createLivroEstado, deleteLivroEstado, findAllLivroEstado, findLivroEstado, updateLivroEstado } from '../controllers/admin/livros/estado_livros.controller';
 import { createLivros, deleteLivros, findAllLivros, findLivros, updateLivros } from '../controllers/admin/livros/livros.controller';
+import { createAdmin, deleteAdmin, findAdmin, findAllAdmin, updateAdmin } from '../controllers/admin/moreAdmin/admins.admin';
 import { loginAdmin } from '../controllers/admin/register/loginSuperadmin.controllers';
+import { allCandidatura, candidaturaVerify } from '../controllers/admin/teachers/teachers.admin';
 import { notToken } from '../middlewares/auth.middleware';
 
 
@@ -87,5 +89,16 @@ router.get('/all/curso', [], findAllCursos)
 router.get('/get/curso/:id', [], findCurso)
 router.patch('/update/curso/:id', [], updateCurso)
 router.delete('/delete/curso/:id', [], deleteCurso)
+
+//candidatura Verificada
+router.get('/all/candidatura', allCandidatura)
+router.patch('/update/candidatura/:id', [], candidaturaVerify)
+
+//admin
+router.post('/create/admin', [], createAdmin)
+router.get('/all/admin', [], findAllAdmin)
+router.get('/get/admin/:id', [], findAdmin)
+router.patch('/update/admin/:id', [], updateAdmin)
+router.delete('/delete/admin/:id', [], deleteAdmin)
 
 export default router;

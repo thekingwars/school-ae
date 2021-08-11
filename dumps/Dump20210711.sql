@@ -1553,7 +1553,7 @@ CREATE TABLE `professores` (
   `professor_codigo_postal` int DEFAULT NULL,
   `professor_freguesia` varchar(45) DEFAULT NULL,
   `professor_concelho` varchar(45) DEFAULT NULL,
-  `professor_telemovel` int DEFAULT NULL,
+  `professor_telemovel` VARCHAR(45) DEFAULT NULL,
   `professor_contacto` int DEFAULT NULL,
   `professor_lingua_nativa` varchar(45) DEFAULT NULL,
   `professor_foto` varchar(100) DEFAULT NULL,
