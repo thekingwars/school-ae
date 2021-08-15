@@ -435,7 +435,6 @@ CREATE TABLE `cursos` (
   `modalidade` varchar(5) NOT NULL,
   `programa_fk` int NOT NULL,
   `horario` int DEFAULT NULL,
-  `sala_prevista_sala_id` int DEFAULT NULL,
   `instalacoes_fk` int NOT NULL,
   `tempo_aula` VARCHAR(45) NOT NULL,
   `Frequencia` VARCHAR(45) NOT NULL,

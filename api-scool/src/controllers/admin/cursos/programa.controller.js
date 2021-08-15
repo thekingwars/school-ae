@@ -12,8 +12,6 @@ export const createPrograma = async(req, res) => {
         programa_tempo_aula
     }
 
-    console.log(req.body)
-
     if (!programa_nome || !programa_horas || !programa_tempo_aula) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
     }
@@ -30,6 +28,10 @@ export const createPrograma = async(req, res) => {
         return res.status(400).json({ ok: false, err: 'só são permitidos números com decimais' });
     }
 
+
+    if(programa_horas > 1 || programa_tempo_aula > 1){
+        return res.status(400).json({ ok: false, err: 'O alcance não pode ser superior a 1' });
+    }
 
     programa = await addSql(sql, data);
 

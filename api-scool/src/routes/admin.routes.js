@@ -1,6 +1,5 @@
 import { Router } from 'express';
 import { createCurso, deleteCurso, findAllCursos, findCurso, updateCurso } from '../controllers/admin/cursos/cursos.controller';
-import { createLingua, deleteLingua, findAllLingua, findLingua, updateLingua } from '../controllers/admin/cursos/lingua.controllers';
 import { createPrograma, deletePrograma, findAllPrograma, findPrograma, updatePrograma } from '../controllers/admin/cursos/programa.controller';
 import { createAulas, deleteAulas, findAllAulas, findAulas, updateAulas } from '../controllers/admin/escolas/aulas.controller';
 import { createEquipamentos, deleteEquipamentos, findAllEquipamentos, findEquipamentos, updateEquipamentos } from '../controllers/admin/escolas/equipamentos.controllers';
@@ -12,6 +11,7 @@ import { createLivros, deleteLivros, findAllLivros, findLivros, updateLivros } f
 import { createAdmin, deleteAdmin, findAdmin, findAllAdmin, updateAdmin } from '../controllers/admin/moreAdmin/admins.admin';
 import { loginAdmin } from '../controllers/admin/register/loginSuperadmin.controllers';
 import { allCandidatura, candidaturaVerify } from '../controllers/admin/teachers/teachers.admin';
+import { createTurma } from '../controllers/admin/turma/turma.controller';
 import { notToken } from '../middlewares/auth.middleware';
 
 
@@ -69,13 +69,6 @@ router.get('/get/livros/:id', [notToken], findLivros)
 router.patch('/update/livros/:id', [notToken], updateLivros)
 router.delete('/delete/livros/:id', [notToken], deleteLivros)
 
-//linguas
-router.post('/create/lingua', [], createLingua)
-router.get('/all/lingua', [], findAllLingua)
-router.get('/get/lingua/:id', [], findLingua)
-router.patch('/update/lingua/:id', [], updateLingua)
-router.delete('/delete/lingua/:id', [], deleteLingua)
-
 //programa
 router.post('/create/programa', [], createPrograma)
 router.get('/all/programa', [], findAllPrograma)
@@ -100,5 +93,8 @@ router.get('/all/admin', [], findAllAdmin)
 router.get('/get/admin/:id', [], findAdmin)
 router.patch('/update/admin/:id', [], updateAdmin)
 router.delete('/delete/admin/:id', [], deleteAdmin)
+
+//turmas
+router.post('/create/turma', [], createTurma)
 
 export default router;

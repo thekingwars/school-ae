@@ -17,7 +17,7 @@ export const createCurso = async(req, res) => {
         Duracao,
         programa_fk,
         instalacoes_fk,
-        lingua_fk
+        lingua
     } = req.body;
 
     let sql = 'INSERT INTO cursos SET ?';
@@ -37,7 +37,7 @@ export const createCurso = async(req, res) => {
         Duracao,
         programa_fk,
         instalacoes_fk,
-        lingua_fk
+        lingua
     }
 
     if (!curso_valor_matricula ||
@@ -54,7 +54,7 @@ export const createCurso = async(req, res) => {
         !Duracao ||
         !programa_fk ||
         !instalacoes_fk ||
-        !lingua_fk
+        !lingua
     ) {
         return res.status(400).json({ ok: false, err: 'Campos obrigatórios' });
     }
