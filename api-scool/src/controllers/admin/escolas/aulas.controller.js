@@ -28,9 +28,10 @@ export const createAulas = async(req, res) => {
 }
 
 export const findAllAulas = async(req, res) => {
-    let sql = ` SELECT a1.*, b1.*
+    /*let sql = ` SELECT a1.*, b1.*
         	    FROM aulas a1 JOIN salas b1 ON a1.salas_fk = b1.sala_id
-                ORDER BY aulas_id`;
+                ORDER BY aulas_id`;*/
+    let sql = `SELECT * FROM aulas`
 
     aulas = await addSql(sql);
 
@@ -39,10 +40,10 @@ export const findAllAulas = async(req, res) => {
 
 export const findAulas = async(req, res) => {
     const { id } = req.params;
-    let sql = ` SELECT a1.*, b1.*
+    /*let sql = ` SELECT a1.*, b1.*
                 FROM aulas a1 JOIN salas b1 ON a1.salas_fk = b1.sala_id
-                WHERE aulas_id = ?`;
-
+                WHERE aulas_id = ?`;*/
+    let sql = `SELECT * FROM aulas WHERE aulas_id = ?`
     aulas = await addSql(sql, id);
     return res.status(200).json({ ok: true, aulas: aulas[0] });
 }

@@ -10,6 +10,7 @@ import { createLivroEstado, deleteLivroEstado, findAllLivroEstado, findLivroEsta
 import { createLivros, deleteLivros, findAllLivros, findLivros, updateLivros } from '../controllers/admin/livros/livros.controller';
 import { createAdmin, deleteAdmin, findAdmin, findAllAdmin, updateAdmin } from '../controllers/admin/moreAdmin/admins.admin';
 import { loginAdmin } from '../controllers/admin/register/loginSuperadmin.controllers';
+import { createStaff, deleteStaff, findAllStaff } from '../controllers/admin/staff/staff.controler';
 import { allCandidatura, candidaturaVerify } from '../controllers/admin/teachers/teachers.admin';
 import { createTurma } from '../controllers/admin/turma/turma.controller';
 import { notToken } from '../middlewares/auth.middleware';
@@ -82,6 +83,13 @@ router.get('/all/curso', [], findAllCursos)
 router.get('/get/curso/:id', [], findCurso)
 router.patch('/update/curso/:id', [], updateCurso)
 router.delete('/delete/curso/:id', [], deleteCurso)
+
+//staff
+router.post('/create/staff', [], createStaff)
+router.get('/all/staff', [], findAllStaff)
+router.get('/get/curso/:id', [], findCurso)
+router.patch('/update/curso/:id', [], updateCurso)
+router.delete('/delete/staff/:id', [], deleteStaff)
 
 //candidatura Verificada
 router.get('/all/candidatura', allCandidatura)

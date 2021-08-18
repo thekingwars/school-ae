@@ -4,7 +4,7 @@ export const candidaturaVerify = async(req, res) => {
     let { confirm } = req.body
     const sql = 'UPDATE professores SET ? WHERE professor_id = ?'
 
-    if (confirm === 'si'.toLowerCase()) {
+    if (confirm) {
         confirm = true
     } else {
         confirm = false
@@ -32,8 +32,6 @@ export const allCandidatura = async(req, res) => {
     const sql = 'SELECT professore_verificado, professor_id, professor_cv, professor_lingua_nativa FROM professores'
 
     const professor = await db.query(sql)
-
-    console.log(professor)
 
     return res.status(200).json({ ok: true, professor });
 }
