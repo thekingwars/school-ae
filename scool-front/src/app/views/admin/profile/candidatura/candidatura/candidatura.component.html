@@ -1,0 +1,37 @@
+<div class="pt-5 p-3">
+    <ng-container *ngIf="teachers">
+        <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+        <div class="card" class="">
+            <p-table #tt [value]="teachers" [(contextMenuSelection)]="selectedTeacher" [rowsPerPageOptions]="[10,25,50]" [contextMenu]="cm" dataKey="code" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>CV</th>
+                        <th>Lingua nativa</th>
+                        <th>Verificado</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-teacher>
+                    <tr [pContextMenuRow]="teacher">
+                        <td>{{teacher.professor_id}}</td>
+                        <td>{{teacher.professor_cv}}</td>
+                        <td>{{teacher.professor_lingua_nativa}}</td>
+                        <td><i [class]="teacher.professore_verificado === 0 ? 'pi pi-times' : 'pi pi-check' "></i></td>
+                    </tr>
+                    <ng-container>
+                        <p-dialog header="Verificar Professor" [(visible)]="display" [modal]="true" [style]="{width: '50vw'}" [draggable]="false" [resizable]="false">
+                            <p class="p-m-0">
+                                Tem a certeza de que quer verificar este professor?
+                                <br> Já se certificou de ler o seu curriculum vitae e toda a informação relevante? Se assim for, clique em ok e poderá verificar este professor.
+                            </p>
+                            <ng-template pTemplate="footer">
+                                <p-button icon="pi pi-check" (onClick)="validar($event, teacher.professor_id)" label="Ok" styleClass="p-button-text"></p-button>
+                            </ng-template>
+                        </p-dialog>
+                    </ng-container>
+                </ng-template>
+            </p-table>
+        </div>
+    </ng-container>
+</div>

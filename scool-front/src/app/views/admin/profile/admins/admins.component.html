@@ -1,0 +1,108 @@
+<div class="pt-5 p-3">
+    <p-toast position="bottom-right"></p-toast>
+    <ng-container *ngIf="admins">
+        <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+        <div class="card">
+            <p-table #tt [value]="admins" [(contextMenuSelection)]="selectedAdmins" [rowsPerPageOptions]="[10,25,50]" [contextMenu]="cm" dataKey="code" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex">
+                        <button type="button" pButton pRipple (click)="display = true" class="p-mr-2" label="Criar" icon="pi pi-plus"></button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Nome</th>
+                        <th>Role</th>
+                        <th>Telemovel</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-admin>
+                    <tr [pContextMenuRow]="admin">
+                        <td>{{admin.admin_id}}</td>
+                        <td>{{admin.admin_email}}</td>
+                        <td>{{admin.admin_nome}}</td>
+                        <td>{{admin.admin_role}}</td>
+                        <td>{{admin.admin_telemovel}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </ng-container>
+
+    <ng-container>
+        <p-sidebar [(visible)]="display" position="right" (onHide)="resetForm()">
+            <h1>Criar um Admin</h1>
+            <form [formGroup]="formAdmins" class="mt-2" (ngSubmit)="onSubmit()">
+                <div class="p-grid p-fluid">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="text" [class]="isValidField('admin_email') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_email" pInputText placeholder="Email">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <p-password [class]="isValidField('admin_password') ? 'ng-dirty ng-invalid' : ''" [(ngModel)]="password" class="w-100" [toggleMask]="true" formControlName="admin_password"></p-password>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="text" [class]="isValidField('admin_nome') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_nome" pInputText placeholder="Nome">
+                            </div>
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="text" [class]="isValidField('admin_telemovel') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_telemovel" pInputText placeholder="Telemovel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" pButton class="p-mr-2" label="Criar" [disabled]="formAdmins.invalid"></button>
+            </form>
+        </p-sidebar>
+    </ng-container>
+
+    <ng-container *ngIf="admins">
+        <p-sidebar [(visible)]="displayUpdate" position="right" (onHide)="resetForm()">
+            <h1>Administrador de actualizações</h1>
+            <form [formGroup]="formUpdateAdmins" class="mt-2 h-responsive" (ngSubmit)="onSubmitUpdate()">
+                <div class="p-grid p-fluid">
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="text" [class]="isValidField('admin_email') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_email" pInputText placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="text" [class]="isValidField('admin_nome') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_nome" pInputText placeholder="Nome">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <p-dropdown class="w-100" [options]="roles" formControlName="admin_role" optionLabel="name" [showClear]="true" placeholder="Selected role"></p-dropdown>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <div class="p-inputgroup">
+                                <input type="tel" [class]="isValidField('admin_telemovel') ? 'ng-dirty ng-invalid' : ''" formControlName="admin_telemovel" pInputText placeholder="Telemovel">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" pButton class="p-mr-2" label="Actualização" [disabled]="formUpdateAdmins.invalid"></button>
+            </form>
+        </p-sidebar>
+    </ng-container>
+</div>

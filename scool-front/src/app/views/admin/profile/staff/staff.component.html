@@ -1,0 +1,105 @@
+<div class="pt-5 p-3">
+    <p-toast position="bottom-right"></p-toast>
+    <ng-container *ngIf="staff">
+        <p-contextMenu #cm [model]="items"></p-contextMenu>
+
+        <div class="card">
+            <p-table #tt [value]="staff" [(contextMenuSelection)]="selectedStaff" [rowsPerPageOptions]="[10,25,50]" [contextMenu]="cm" dataKey="code" [paginator]="true" [rows]="10" [showCurrentPageReport]="true" currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries">
+                <ng-template pTemplate="caption">
+                    <div class="p-d-flex">
+                        <button type="button" pButton pRipple (click)="display = true" class="p-mr-2" label="Criar" icon="pi pi-plus"></button>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>ID</th>
+                        <th>Email</th>
+                        <th>Nome</th>
+                        <th>Role</th>
+                        <th>Telemovel</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-staff>
+                    <tr [pContextMenuRow]="staff">
+                        <td>{{staff.staff_nome}}</td>
+                        <td>{{staff.staff_telemovel}}</td>
+                        <td>{{staff.staff_rua}}</td>
+                        <td>{{staff.staff_email}}</td>
+                        <td>{{staff.staff_codigo_postal}}</td>
+                        <td>{{staff.staff_freguesia}}</td>
+                        <td>{{staff.staff_concelho}}</td>
+                        <td>{{staff.staff_nacionalidade}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <ng-container *ngIf="{
+                codigo_postal: codigo_postal$ | async
+            } as state">
+            <p-sidebar [(visible)]="display" position="right" (onHide)="resetForm()">
+                <h1>Criar um Staff</h1>
+                <form [formGroup]="formStaff" class="mt-2 h-responsive" (ngSubmit)="onSubmit()">
+                    <div class="p-grid p-fluid">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <input type="text" [class]="isValidField('staff_email') ? 'ng-dirty ng-invalid' : ''" formControlName="staff_email" pInputText placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <p-password [(ngModel)]="password" class="w-100" [class]="isValidField('staff_password') ? 'ng-dirty ng-invalid' : ''" [toggleMask]="true" formControlName="staff_password"></p-password>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <input type="text" [class]="isValidField('staff_nome') ? 'ng-dirty ng-invalid' : ''" formControlName="staff_nome" pInputText placeholder="Nome">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <input type="tel" [class]="isValidField('staff_telemovel') ? 'ng-dirty ng-invalid' : ''" formControlName="staff_telemovel" pInputText placeholder="Telemovel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <input type="text" [class]="isValidField('staff_rua') ? 'ng-dirty ng-invalid' : ''" formControlName="staff_rua" pInputText placeholder="Nome">
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <input type="text" [class]="isValidField('staff_freguesia') ? 'ng-dirty ng-invalid' : ''" formControlName="staff_freguesia" pInputText placeholder="Telemovel">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <p-dropdown class="w-100" [options]="state.codigo_postal" formControlName="admin_role" optionLabel="name" [showClear]="true" placeholder="Selected role"></p-dropdown>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <div class="p-inputgroup">
+                                    <p-dropdown [virtualScroll]="true" [itemSize]="399" [filter]="true" class="w-100" [options]="concelho" formControlName=" admin_role " optionLabel="name " [showClear]="true " placeholder="Selected role "></p-dropdown>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p></p>
+
+                    <button type="submit " pButton class="p-mr-2 " label="Criar " [disabled]="formStaff.invalid "></button>
+                </form>
+            </p-sidebar>
+        </ng-container>
+    </ng-container>
+</div>

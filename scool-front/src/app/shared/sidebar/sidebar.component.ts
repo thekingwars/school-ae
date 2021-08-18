@@ -222,7 +222,46 @@ export class SidebarComponent implements OnInit {
               }
             }         
           ]
-        }
+        },
+        {
+          title: 'Professore',
+          icon: "nav-icon fas fa-book",
+          children: [
+            {
+              title: 'Ver Candidaturas',
+              icon: 'nav-icon fas fa-book-open',
+              routerLink:(id) => {
+                return `/admin/profile/candidaturas`
+              }
+            }       
+          ]
+        },
+        {
+          title: 'admins',
+          icon: "nav-icon fas fa-book",
+          children: [
+            {
+              title: 'Ver admins',
+              icon: 'nav-icon fas fa-book-open',
+              routerLink:(id) => {
+                return `/admin/profile/admins`
+              }
+            }       
+          ]
+        },
+        {
+          title: 'staff',
+          icon: "nav-icon fas fa-book",
+          children: [
+            {
+              title: 'Ver staffs',
+              icon: 'nav-icon fas fa-book-open',
+              routerLink:(id) => {
+                return `/admin/profile/staffs`
+              }
+            }       
+          ]
+        },
       ]
     }
   }

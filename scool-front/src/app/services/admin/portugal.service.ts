@@ -11,11 +11,11 @@ export class PortugalService {
 
   constructor(private http: HttpClient) { }
 
-  getCodigoPostal(): Observable<CodigoPostal>{
-    return this.http.get<CodigoPostal>('https://ctt-api-service.herokuapp.com/api/v1/codigopostal')
+  getCodigoPostal(): Observable<CodigoPostal[]>{
+    return this.http.get<CodigoPostal[]>('https://ctt-api-service.herokuapp.com/api/v1/codigopostal')
   }
 
-  getConcelho(): Observable<Concelho>{
-    return this.http.get<Concelho>('https://ctt-api-service.herokuapp.com/api/v1/concelho')
+  getConcelho(): Observable<Concelho[]>{
+    return this.http.get<Concelho[]>('https://ctt-api-service.herokuapp.com/api/v1/concelho')
   }
 }

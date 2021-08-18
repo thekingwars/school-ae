@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 
@@ -45,8 +45,21 @@ import { EstadoLivrosComponent } from './profile/estado-livros/estado-livros.com
 import { CreateEstadoComponent } from './profile/estado-livros/create-estado/create-estado.component';
 import { UpdateEstadoComponent } from './profile/estado-livros/update-estado/update-estado.component';
 import { ViewEstadoComponent } from './profile/estado-livros/view-estado/view-estado.component';
+import { CandidaturaComponent } from './profile/candidatura/candidatura/candidatura.component';
 
-
+import { PrimeNGConfig } from 'primeng/api';
+import { TableModule } from 'primeng/table'
+import { ContextMenuModule } from 'primeng/contextmenu'
+import { PaginatorModule } from 'primeng/paginator'
+import { InputTextModule } from 'primeng/inputtext'
+import { ButtonModule } from 'primeng/button';
+import { SidebarModule } from 'primeng/sidebar';
+import { DialogModule } from 'primeng/dialog';
+import { AdminsComponent } from './profile/admins/admins.component';
+import { PasswordModule } from 'primeng/password';
+import { ToastModule } from 'primeng/toast';
+import { DropdownModule } from 'primeng/dropdown';
+import { StaffComponent } from './profile/staff/staff.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -94,7 +107,10 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     EstadoLivrosComponent,
     CreateEstadoComponent,
     UpdateEstadoComponent,
-    ViewEstadoComponent
+    ViewEstadoComponent,
+    CandidaturaComponent,
+    AdminsComponent,
+    StaffComponent
   ],
   imports: [
     CommonModule,
@@ -105,6 +121,16 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     AgGridModule.withComponents([]),
     NgxMaskModule.forRoot(maskConfigFunction),
     NgxSelectModule,
+    ContextMenuModule,
+    PaginatorModule,
+    TableModule,
+    InputTextModule,
+    ButtonModule,
+    SidebarModule,
+    DialogModule,
+    PasswordModule,
+    ToastModule,
+    DropdownModule,
     FullCalendarModule
   ],
   exports: [
@@ -115,4 +141,10 @@ const maskConfigFunction: () => Partial<IConfig> = () => {
     ViewEscolaComponent,
   ]
 })
-export class AdminModule { }
+export class AdminModule implements OnInit{
+  constructor(private primengConfig: PrimeNGConfig) {}
+
+  ngOnInit() {
+      this.primengConfig.ripple = true;
+  }
+}

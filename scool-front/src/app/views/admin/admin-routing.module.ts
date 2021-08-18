@@ -28,6 +28,9 @@ import { CreateEstadoComponent } from './profile/estado-livros/create-estado/cre
 import { EstadoLivrosComponent } from './profile/estado-livros/estado-livros.component';
 import { UpdateEstadoComponent } from './profile/estado-livros/update-estado/update-estado.component';
 import { ViewEstadoComponent } from './profile/estado-livros/view-estado/view-estado.component';
+import { CandidaturaComponent } from './profile/candidatura/candidatura/candidatura.component';
+import { AdminsComponent } from './profile/admins/admins.component';
+import { StaffComponent } from './profile/staff/staff.component';
 
 const routes: Routes = [
   {
@@ -137,6 +140,18 @@ const routes: Routes = [
           {
             path: 'get/estado-livros/:id',
             component: ViewEstadoComponent
+          },
+          {
+            path: 'candidaturas',
+            component: CandidaturaComponent
+          },
+          {
+            path: 'admins',
+            component: AdminsComponent
+          },
+          {
+            path: 'staffs',
+            component: StaffComponent
           }
         ]
       }

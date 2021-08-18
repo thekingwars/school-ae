@@ -1,0 +1,17 @@
+:host ::ng-deep .p-sidebar-right {
+    z-index: 999999 !important;
+    width: 70vw;
+}
+
+.h-responsive {
+    height: 45vh;
+}
+
+@media(max-width: 578px) {
+     :host ::ng-deep .p-sidebar-right {
+        width: 100vw;
+    }
+    .h-responsive {
+        height: 75vh;
+    }
+}
