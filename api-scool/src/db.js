@@ -3,10 +3,10 @@ import { promisify } from 'util';
 import { keys } from './config/configs'
 
 const myConnection = mysql.createConnection({
-    host: 'localhost',
+    host: keys.DB_HOST,
     port: keys.DB_PORT,
-    user: 'root',
-    //password: keys.DB_PASSWORD,
+    user: keys.DB_USER,
+    password: keys.DB_PASSWORD,
     database: keys.DB_DATABASE
 });
 
